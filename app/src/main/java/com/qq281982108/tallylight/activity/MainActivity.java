@@ -9,11 +9,13 @@ import com.qq281982108.bottom_bar.BottomBarFragment;
 import com.qq281982108.tallylight.R;
 import com.qq281982108.tallylight.fragment.LeftFragment;
 import com.qq281982108.tallylight.fragment.SampleFragment;
+import com.qq281982108.tallylight.fragment.TimeLineFragment;
 
 public class MainActivity extends BaseActivity {
-    private BottomBar mBottomBar;
     LeftFragment fragment = new LeftFragment();
     SampleFragment sampleFragment = new SampleFragment();
+    TimeLineFragment mTimeLineFragment = new TimeLineFragment();
+    private BottomBar mBottomBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,7 @@ public class MainActivity extends BaseActivity {
                 R.id.fragmentContainer,
                 new BottomBarFragment(fragment, R.drawable.ic_recents, "Recents"),
                 new BottomBarFragment(sampleFragment, R.drawable.ic_favorites, "Favorites"),
-                new BottomBarFragment(fragment, R.drawable.ic_nearby, "Nearby"),
+                new BottomBarFragment(mTimeLineFragment, R.drawable.ic_nearby, "Nearby"),
                 new BottomBarFragment(fragment, R.drawable.ic_friends, "Friends"),
                 new BottomBarFragment(fragment, R.drawable.ic_restaurants, "Food")
         );

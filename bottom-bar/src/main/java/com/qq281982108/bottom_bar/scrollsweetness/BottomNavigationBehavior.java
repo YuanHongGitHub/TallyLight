@@ -9,7 +9,7 @@ import android.view.animation.Interpolator;
 
 /**
  * Created by Nikola D. on 3/15/2016.
- *
+ * <p/>
  * Credit goes to Nikola Despotoski:
  * https://github.com/NikolaDespotoski
  */
@@ -45,12 +45,6 @@ public class BottomNavigationBehavior<V extends View> extends VerticalScrollingB
         }
     }
 
-    @Override
-    protected boolean onNestedDirectionFling(CoordinatorLayout coordinatorLayout, V child, View target, float velocityX, float velocityY, @ScrollDirection int scrollDirection) {
-        handleDirection(child, scrollDirection);
-        return true;
-    }
-
     private void animateOffset(final V child, final int offset) {
         ensureOrCancelAnimator(child);
         mTranslationAnimator.translationY(offset).start();
@@ -64,5 +58,11 @@ public class BottomNavigationBehavior<V extends View> extends VerticalScrollingB
         } else {
             mTranslationAnimator.cancel();
         }
+    }
+
+    @Override
+    protected boolean onNestedDirectionFling(CoordinatorLayout coordinatorLayout, V child, View target, float velocityX, float velocityY, @ScrollDirection int scrollDirection) {
+        handleDirection(child, scrollDirection);
+        return true;
     }
 }

@@ -13,7 +13,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by Nikola D. on 11/22/2015.
- *
+ * <p/>
  * Credit goes to Nikola Despotoski:
  * https://github.com/NikolaDespotoski
  */
@@ -34,15 +34,6 @@ public abstract class VerticalScrollingBehavior<V extends View> extends Coordina
         super();
     }
 
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({ScrollDirection.SCROLL_DIRECTION_UP, ScrollDirection.SCROLL_DIRECTION_DOWN})
-    public @interface ScrollDirection {
-        int SCROLL_DIRECTION_UP = 1;
-        int SCROLL_DIRECTION_DOWN = -1;
-        int SCROLL_NONE = 0;
-    }
-
-
     /*
        @return Overscroll direction: SCROLL_DIRECTION_UP, CROLL_DIRECTION_DOWN, SCROLL_NONE
    */
@@ -50,7 +41,6 @@ public abstract class VerticalScrollingBehavior<V extends View> extends Coordina
     public int getOverScrollDirection() {
         return mOverScrollDirection;
     }
-
 
     /**
      * @return Scroll direction: SCROLL_DIRECTION_UP, SCROLL_DIRECTION_DOWN, SCROLL_NONE
@@ -60,21 +50,6 @@ public abstract class VerticalScrollingBehavior<V extends View> extends Coordina
     public int getScrollDirection() {
         return mScrollDirection;
     }
-
-
-    /**
-     * @param coordinatorLayout
-     * @param child
-     * @param direction         Direction of the overscroll: SCROLL_DIRECTION_UP, SCROLL_DIRECTION_DOWN
-     * @param currentOverScroll Unconsumed value, negative or positive based on the direction;
-     * @param totalOverScroll   Cumulative value for current direction
-     */
-    public abstract void onNestedVerticalOverScroll(CoordinatorLayout coordinatorLayout, V child, @ScrollDirection int direction, int currentOverScroll, int totalOverScroll);
-
-    /**
-     * @param scrollDirection Direction of the overscroll: SCROLL_DIRECTION_UP, SCROLL_DIRECTION_DOWN
-     */
-    public abstract void onDirectionNestedPreScroll(CoordinatorLayout coordinatorLayout, V child, View target, int dx, int dy, int[] consumed, @ScrollDirection int scrollDirection);
 
     @Override
     public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, V child, View directTargetChild, View target, int nestedScrollAxes) {
@@ -105,6 +80,15 @@ public abstract class VerticalScrollingBehavior<V extends View> extends Coordina
         onNestedVerticalOverScroll(coordinatorLayout, child, mOverScrollDirection, dyConsumed, mTotalDyUnconsumed);
     }
 
+    /**
+     * @param coordinatorLayout
+     * @param child
+     * @param direction         Direction of the overscroll: SCROLL_DIRECTION_UP, SCROLL_DIRECTION_DOWN
+     * @param currentOverScroll Unconsumed value, negative or positive based on the direction;
+     * @param totalOverScroll   Cumulative value for current direction
+     */
+    public abstract void onNestedVerticalOverScroll(CoordinatorLayout coordinatorLayout, V child, @ScrollDirection int direction, int currentOverScroll, int totalOverScroll);
+
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, V child, View target, int dx, int dy, int[] consumed) {
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed);
@@ -119,6 +103,10 @@ public abstract class VerticalScrollingBehavior<V extends View> extends Coordina
         onDirectionNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, mScrollDirection);
     }
 
+    /**
+     * @param scrollDirection Direction of the overscroll: SCROLL_DIRECTION_UP, SCROLL_DIRECTION_DOWN
+     */
+    public abstract void onDirectionNestedPreScroll(CoordinatorLayout coordinatorLayout, V child, View target, int dx, int dy, int[] consumed, @ScrollDirection int scrollDirection);
 
     @Override
     public boolean onNestedFling(CoordinatorLayout coordinatorLayout, V child, View target, float velocityX, float velocityY, boolean consumed) {
@@ -143,6 +131,14 @@ public abstract class VerticalScrollingBehavior<V extends View> extends Coordina
     @Override
     public Parcelable onSaveInstanceState(CoordinatorLayout parent, V child) {
         return super.onSaveInstanceState(parent, child);
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({ScrollDirection.SCROLL_DIRECTION_UP, ScrollDirection.SCROLL_DIRECTION_DOWN})
+    public @interface ScrollDirection {
+        int SCROLL_DIRECTION_UP = 1;
+        int SCROLL_DIRECTION_DOWN = -1;
+        int SCROLL_NONE = 0;
     }
 
 }

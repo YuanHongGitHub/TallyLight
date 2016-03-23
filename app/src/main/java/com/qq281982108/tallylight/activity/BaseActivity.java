@@ -16,7 +16,7 @@ import com.qq281982108.tallylight.util.ActivityCollector;
  * 修改备注：FragmentActivity的基类
  * 1.和ActivityCollector搭配使用，可随时关闭Activity
  */
-public class BaseActivity extends FragmentActivity{
+public class BaseActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // hide the window title.
@@ -28,6 +28,7 @@ public class BaseActivity extends FragmentActivity{
         Log.d("BaseActivity", getClass().getSimpleName());
         ActivityCollector.addActivity(this);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

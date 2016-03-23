@@ -137,15 +137,15 @@ class MiscUtils {
                     onCancel();
                 }
 
-                @Override
-                public void onAnimationCancel(View view) {
-                    onCancel();
-                }
-
                 private void onCancel() {
                     backgroundView.setBackgroundColor(newColor);
                     bgOverlay.setVisibility(View.INVISIBLE);
                     ViewCompat.setAlpha(bgOverlay, 1);
+                }
+
+                @Override
+                public void onAnimationCancel(View view) {
+                    onCancel();
                 }
             }).start();
         } else if (animator != null) {
@@ -155,15 +155,15 @@ class MiscUtils {
                     onCancel();
                 }
 
-                @Override
-                public void onAnimationCancel(Animator animation) {
-                    onCancel();
-                }
-
                 private void onCancel() {
                     backgroundView.setBackgroundColor(newColor);
                     bgOverlay.setVisibility(View.INVISIBLE);
                     ViewCompat.setAlpha(bgOverlay, 1);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    onCancel();
                 }
             });
 
@@ -176,8 +176,9 @@ class MiscUtils {
 
     /**
      * A convenience method for setting text appearance.
+     *
      * @param textView a TextView which textAppearance to modify.
-     * @param resId a style resource for the text appearance.
+     * @param resId    a style resource for the text appearance.
      */
     @SuppressWarnings("deprecation")
     public static void setTextAppearance(TextView textView, int resId) {

@@ -19,6 +19,7 @@ import com.qq281982108.tallylight.R;
  */
 public class LeftFragment extends Fragment {
     private Button mButton;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class LeftFragment extends Fragment {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"test",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
             }
         });
         return view;

@@ -23,6 +23,7 @@ import android.support.annotation.StringRes;
  */
 public class BottomBarTab extends BottomBarItemBase {
     protected int id = -1;
+
     /**
      * Creates a new Tab for the BottomBar.
      *

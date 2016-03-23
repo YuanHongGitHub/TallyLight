@@ -44,9 +44,10 @@ public class BottomBarFragment extends BottomBarItemBase {
 
     /**
      * Creates a new Tab for the BottomBar.
-     * @param fragment a Fragment to be shown when this Tab is selected.
+     *
+     * @param fragment     a Fragment to be shown when this Tab is selected.
      * @param iconResource a resource for the Tab icon.
-     * @param title title for the Tab.
+     * @param title        title for the Tab.
      */
     public BottomBarFragment(android.app.Fragment fragment, @DrawableRes int iconResource, @NonNull String title) {
         this.fragment = fragment;
@@ -56,9 +57,10 @@ public class BottomBarFragment extends BottomBarItemBase {
 
     /**
      * Creates a new Tab for the BottomBar.
+     *
      * @param fragment a Fragment to be shown when this Tab is selected.
-     * @param icon an icon for the Tab.
-     * @param title title for the Tab.
+     * @param icon     an icon for the Tab.
+     * @param title    title for the Tab.
      */
     public BottomBarFragment(android.app.Fragment fragment, Drawable icon, @NonNull String title) {
         this.fragment = fragment;
@@ -68,8 +70,9 @@ public class BottomBarFragment extends BottomBarItemBase {
 
     /**
      * Creates a new Tab for the BottomBar.
-     * @param fragment a Fragment to be shown when this Tab is selected.
-     * @param icon an icon for the Tab.
+     *
+     * @param fragment      a Fragment to be shown when this Tab is selected.
+     * @param icon          an icon for the Tab.
      * @param titleResource resource for the title.
      */
     public BottomBarFragment(android.app.Fragment fragment, Drawable icon, @StringRes int titleResource) {
@@ -80,8 +83,9 @@ public class BottomBarFragment extends BottomBarItemBase {
 
     /**
      * Creates a new Tab for the BottomBar.
-     * @param fragment a Fragment to be shown when this Tab is selected.
-     * @param iconResource a resource for the Tab icon.
+     *
+     * @param fragment      a Fragment to be shown when this Tab is selected.
+     * @param iconResource  a resource for the Tab icon.
      * @param titleResource resource for the title.
      */
     public BottomBarFragment(android.app.Fragment fragment, @DrawableRes int iconResource, @StringRes int titleResource) {
@@ -93,9 +97,10 @@ public class BottomBarFragment extends BottomBarItemBase {
 
     /**
      * Creates a new Tab for the BottomBar.
-     * @param fragment a Fragment to be shown when this Tab is selected.
+     *
+     * @param fragment     a Fragment to be shown when this Tab is selected.
      * @param iconResource a resource for the Tab icon.
-     * @param title title for the Tab.
+     * @param title        title for the Tab.
      */
     public BottomBarFragment(android.support.v4.app.Fragment fragment, @DrawableRes int iconResource, @NonNull String title) {
         this.supportFragment = fragment;
@@ -105,9 +110,10 @@ public class BottomBarFragment extends BottomBarItemBase {
 
     /**
      * Creates a new Tab for the BottomBar.
+     *
      * @param fragment a Fragment to be shown when this Tab is selected.
-     * @param icon an icon for the Tab.
-     * @param title title for the Tab.
+     * @param icon     an icon for the Tab.
+     * @param title    title for the Tab.
      */
     public BottomBarFragment(android.support.v4.app.Fragment fragment, Drawable icon, @NonNull String title) {
         this.supportFragment = fragment;
@@ -117,8 +123,9 @@ public class BottomBarFragment extends BottomBarItemBase {
 
     /**
      * Creates a new Tab for the BottomBar.
-     * @param fragment a Fragment to be shown when this Tab is selected.
-     * @param icon an icon for the Tab.
+     *
+     * @param fragment      a Fragment to be shown when this Tab is selected.
+     * @param icon          an icon for the Tab.
      * @param titleResource resource for the title.
      */
     public BottomBarFragment(android.support.v4.app.Fragment fragment, Drawable icon, @StringRes int titleResource) {
@@ -129,8 +136,9 @@ public class BottomBarFragment extends BottomBarItemBase {
 
     /**
      * Creates a new Tab for the BottomBar.
-     * @param fragment a Fragment to be shown when this Tab is selected.
-     * @param iconResource a resource for the Tab icon.
+     *
+     * @param fragment      a Fragment to be shown when this Tab is selected.
+     * @param iconResource  a resource for the Tab icon.
      * @param titleResource resource for the title.
      */
     public BottomBarFragment(android.support.v4.app.Fragment fragment, @DrawableRes int iconResource, @StringRes int titleResource) {

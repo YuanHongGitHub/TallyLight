@@ -43,7 +43,7 @@ public interface OnMenuTabSelectedListener {
      * BottomBar.
      *
      * @param menuItemId the new visible tab's id that
-     * was assigned in the menu xml resource file.
+     *                   was assigned in the menu xml resource file.
      */
     void onMenuItemSelected(@IdRes int menuItemId);
 }

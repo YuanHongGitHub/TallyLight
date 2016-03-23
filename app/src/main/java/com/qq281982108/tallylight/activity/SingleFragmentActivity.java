@@ -14,12 +14,6 @@ import com.qq281982108.tallylight.R;
  * 修改备注：
  */
 public abstract class SingleFragmentActivity extends BaseActivity {
-    protected abstract Fragment createFragment();
-
-    protected int getLayoutResId() {
-        return R.layout.activity_fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,4 +28,10 @@ public abstract class SingleFragmentActivity extends BaseActivity {
                     .commit();
         }
     }
+
+    protected int getLayoutResId() {
+        return R.layout.activity_fragment;
+    }
+
+    protected abstract Fragment createFragment();
 }
