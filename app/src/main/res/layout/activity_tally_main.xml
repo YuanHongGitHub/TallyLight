@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.qq281982108.pullzoomrefresh.Te
+        android:id="@+id/refreshable_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        </ListView>
+    </com.qq281982108.pullzoomrefresh.Te>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <com.qq281982108.flyrefresh.FlyRefreshLayout
+            android:id="@+id/fly_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                android:paddingTop="24dp"/>
+        </com.qq281982108.flyrefresh.FlyRefreshLayout>
+    </RelativeLayout>
+
+    <com.qq281982108.tallylight.view.PullToZoomListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone">
+    </com.qq281982108.tallylight.view.PullToZoomListView>
+
+    <Button
+        android:id="@+id/zhuce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="zhuce"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/tianjia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tianjia"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/huoqu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="huoqu"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/xiugai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="xiugai"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/shanchu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="shanchu"
+        android:visibility="gone"/>
+</LinearLayout>
