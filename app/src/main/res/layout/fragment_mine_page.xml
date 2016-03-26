@@ -6,45 +6,197 @@
 
     <include layout="@layout/top_bar"/>
 
+
+    <include layout="@layout/mine_page_item_divider"/>
+
+    <include layout="@layout/mine_page_item_divider_margin"/>
+
     <RelativeLayout
+        android:id="@+id/rl_mine_page_login_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:background="@color/colorWhite"
         android:padding="10dp">
 
         <com.qq281982108.tallylight.view.CircleImageView
+            android:id="@+id/cv_mine_page_login_status"
             border_color="@color/colorBlue"
             border_width="2dp"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/book_travel_bk"/>
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_mine_page_login_status"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/cv_mine_page_login_status"
+            android:text="未登录"/>
 
         <ImageView
             android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_height="15dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:src="@drawable/arrow_little_right"/>
     </RelativeLayout>
 
+    <include layout="@layout/mine_page_item_divider"/>
+
+    <include layout="@layout/mine_page_item_divider_margin"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+
+        android:background="@color/colorWhite"
+        android:padding="10dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorBlue"
+            android:id="@+id/iv_zhutipifu"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/fenxiang"/>
 
         <TextView
+            android:id="@+id/tv_zhutipifu"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_zhutipifu"
+            android:text="主题皮肤"/>
     </RelativeLayout>
+
+    <include layout="@layout/mine_page_item_divider"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_yijianfankui"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/fenxiang"/>
+
+        <TextView
+            android:id="@+id/tv_yijianfankui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_yijianfankui"
+            android:text="意见反馈"/>
+    </RelativeLayout>
+
+    <include layout="@layout/mine_page_item_divider"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_daochushuju"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/fenxiang"/>
+
+        <TextView
+            android:id="@+id/tv_daochushuju"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_daochushuju"
+            android:text="导出数据"/>
+    </RelativeLayout>
+
+    <include layout="@layout/mine_page_item_divider"/>
+
+    <include layout="@layout/mine_page_item_divider_margin"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_fenxiangapp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/fenxiang"/>
+
+        <TextView
+            android:id="@+id/tv_fenxiangapp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_fenxiangapp"
+            android:text="分享APP"/>
+    </RelativeLayout>
+
+    <include layout="@layout/mine_page_item_divider"/>
+
+    <include layout="@layout/mine_page_item_divider_margin"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_shezhi"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/fenxiang"/>
+
+        <TextView
+            android:id="@+id/tv_shezhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_shezhi"
+            android:text="主题皮肤"/>
+    </RelativeLayout>
+
+    <include layout="@layout/mine_page_item_divider"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_gengduo"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/fenxiang"/>
+
+        <TextView
+            android:id="@+id/tv_gengduo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_gengduo"
+            android:text="导出数据"/>
+    </RelativeLayout>
+
+    <include layout="@layout/mine_page_item_divider"/>
 </LinearLayout>

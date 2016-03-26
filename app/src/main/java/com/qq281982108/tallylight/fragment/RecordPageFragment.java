@@ -49,7 +49,7 @@ public class RecordPageFragment extends BaseFragment {
 
     private void initView(View v) {
         mViewPager = (ViewPager) v.findViewById(R.id.id_vp);
-        mIndicator = (ViewPagerIndicator) v.findViewById(R.id.id_indicator);
+        mIndicator = (ViewPagerIndicator) v.findViewById(R.id.id_indicator_record_page);
     }
 
     private void initDatas() {

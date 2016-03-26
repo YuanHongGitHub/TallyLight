@@ -37,7 +37,6 @@ public class TallyLightActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tally_light);
-
         init();
     }
 

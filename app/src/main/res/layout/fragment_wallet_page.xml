@@ -6,11 +6,13 @@
 
     <include layout="@layout/top_bar_calendar"/>
 
-    <ListView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-    </ListView>
+
+
+    </ScrollView>
 
     <Button
         android:layout_width="match_parent"
