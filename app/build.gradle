@@ -21,7 +21,6 @@ android {
 
 dependencies {
     compile files('libs/BmobSDK_V3.4.5_1111.jar')
-    compile project(':bottom-bar')
     compile project(':flyrefresh')
     compile 'jp.wasabeef:recyclerview-animators:1.2.2'
     compile 'com.daimajia.swipelayout:library:1.2.0'

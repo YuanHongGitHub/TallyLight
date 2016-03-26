@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#ffffff"
+              android:orientation="horizontal"
+              android:padding="5dp">
+
+    <TextView
+        android:id="@+id/tv_record_page"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:drawablePadding="3dip"
+        android:drawableTop="@drawable/shiguangzhou"
+        android:gravity="center_horizontal"
+        android:text="记录"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_statement_page"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:drawablePadding="3dip"
+        android:drawableTop="@drawable/baobiao"
+        android:gravity="center_horizontal"
+        android:text="报表"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_add_page"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:drawablePadding="3dip"
+        android:drawableTop="@drawable/qianbao"
+        android:gravity="center_horizontal"
+        android:text="添加"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_wallet_page"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:drawablePadding="3dip"
+        android:drawableTop="@drawable/qianbao"
+        android:gravity="center_horizontal"
+        android:text="钱包"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_mine_page"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:drawablePadding="3dip"
+        android:drawableTop="@drawable/qianbao"
+        android:gravity="center_horizontal"
+        android:text="我的"
+        android:textSize="14sp"/>
+</LinearLayout>
