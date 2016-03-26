@@ -6,6 +6,7 @@
                 android:padding="8dp">
 
     <ImageView
+        android:id="@+id/top_bar_xiaoxi"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_centerVertical="true"

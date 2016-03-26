@@ -3,8 +3,10 @@ package com.qq281982108.tallylight.view;
 import android.content.Context;
 import android.text.format.Time;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,9 +21,8 @@ import com.qq281982108.tallylight.R;
  */
 public class TopBarRelativeLayout extends RelativeLayout implements View.OnClickListener {
 
-    private View mView;
     private TextView mTextView;
-    private Context mContext;
+    private ImageView mImageView;
 
     public TopBarRelativeLayout(Context context) {
         this(context, null);
@@ -29,9 +30,10 @@ public class TopBarRelativeLayout extends RelativeLayout implements View.OnClick
 
     public TopBarRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
-        mView = LayoutInflater.from(mContext).inflate(R.layout.top_bar_calendar, null);
-        mTextView = (TextView) mView.findViewById(R.id.tv_calendar);
+        LayoutInflater.from(context).inflate(R.layout.top_bar_calendar, this);
+        mTextView = (TextView) findViewById(R.id.tv_calendar);
+        mImageView = (ImageView) findViewById(R.id.top_bar_xiaoxi);
+        mTextView.setOnClickListener(this);
         Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
         t.setToNow(); // 取得系统时间。
         mTextView.setText("" + t.monthDay);
@@ -39,6 +41,12 @@ public class TopBarRelativeLayout extends RelativeLayout implements View.OnClick
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.top_bar_xiaoxi:
+                Log.e("yh", "test");
+                break;
+            default:
+                break;
+        }
     }
 }
