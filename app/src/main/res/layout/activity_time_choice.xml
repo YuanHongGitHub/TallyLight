@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorWhite"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/date_select_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <com.qq281982108.tallylight.view.WheelView
+            android:id="@+id/select_date_wheel_year_wheel"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="150dp"
+            android:background="@color/colorLightBlue"/>
+
+        <com.qq281982108.tallylight.view.WheelView
+            android:id="@+id/select_date_month_wheel"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="150dp"
+            android:background="@color/colorLightBlue"/>
+
+        <com.qq281982108.tallylight.view.WheelView
+            android:id="@+id/select_date_day_wheel"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="150dp"
+            android:background="@color/colorLightBlue"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1">
+
+            <com.qq281982108.tallylight.view.WheelView
+                android:id="@+id/select_time_wheel_left"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingLeft="40dp"
+                android:paddingTop="4dp"
+                android:text="时"
+                android:textColor="@color/colorBlue"
+                android:textSize="12sp"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="150dp"
+            android:background="@color/colorLightBlue"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1">
+
+            <com.qq281982108.tallylight.view.WheelView
+                android:id="@+id/select_time_wheel_right"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingLeft="40dp"
+                android:paddingTop="4dp"
+                android:text="分"
+                android:textColor="@color/colorBlue"
+                android:textSize="12sp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/colorLightBlue"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="周期入账"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/baa_blue_switch_on"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorLightBlue"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="重复"/>
+
+            <ImageView
+                android:id="@+id/iv_1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/arrow_little_right"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/iv_1"
+                android:text="每月一次"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorLightBlue"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="结束"/>
+
+            <ImageView
+                android:id="@+id/iv_2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/arrow_little_right"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/iv_2"
+                android:text="永不结束"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorLightBlue"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:text="确定"
+        android:textColor="@color/colorBlue"/>
+</LinearLayout>

@@ -23,6 +23,7 @@ public class TopBarRelativeLayout extends RelativeLayout implements View.OnClick
 
     private TextView mTextView;
     private ImageView mImageView;
+    private RelativeLayout mRelativeLayout;
 
     public TopBarRelativeLayout(Context context) {
         this(context, null);
@@ -33,7 +34,9 @@ public class TopBarRelativeLayout extends RelativeLayout implements View.OnClick
         LayoutInflater.from(context).inflate(R.layout.top_bar_calendar, this);
         mTextView = (TextView) findViewById(R.id.tv_calendar);
         mImageView = (ImageView) findViewById(R.id.top_bar_xiaoxi);
-        mTextView.setOnClickListener(this);
+        mRelativeLayout = (RelativeLayout) findViewById(R.id.rl_calendar);
+        mImageView.setOnClickListener(this);
+        mRelativeLayout.setOnClickListener(this);
         Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
         t.setToNow(); // 取得系统时间。
         mTextView.setText("" + t.monthDay);
@@ -43,8 +46,12 @@ public class TopBarRelativeLayout extends RelativeLayout implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.top_bar_xiaoxi:
-                Log.e("yh", "test");
+                //TODO
+                Log.e("yh", "top_bar_xiaoxi");
                 break;
+            case R.id.rl_calendar:
+                //TODO
+                Log.e("yh", "rl_calendar");
             default:
                 break;
         }

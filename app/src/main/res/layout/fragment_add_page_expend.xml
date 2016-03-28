@@ -2,23 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/colorWhite"
               android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/expend_ll_spending_amount"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/expend_tv_spending_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             android:layout_marginLeft="20dp"
-            android:text="xxx"
-            android:textSize="25sp"/>
+            android:layout_marginTop="15dp"
+            android:text="0.00"
+            android:textSize="30sp"/>
     </LinearLayout>
 
+    <include layout="@layout/light_gray_item_divider"/>
     <RelativeLayout
         android:id="@+id/expend_rl_spending_category"
         android:layout_width="match_parent"
@@ -38,19 +42,30 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/expend_iv_spending_category"
-            android:text="xxx"
+            android:text="早餐"
             android:textSize="20sp"/>
+
+
+        <TextView
+            android:id="@+id/expend_tv_spending_budget_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="0.00"
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/expend_tv_spending_budget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:text="xxx"
-            android:textSize="20sp"/>
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/expend_tv_spending_budget_num"
+            android:text="预算余额："
+            android:textSize="15sp"/>
     </RelativeLayout>
 
+    <include layout="@layout/light_gray_item_divider"/>
     <RelativeLayout
         android:id="@+id/expend_rl_spending_coin_category"
         android:layout_width="match_parent"
@@ -70,10 +85,29 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/expend_iv_spending_coin_category"
-            android:text="xxx"
+            android:text="现金（CNY）"
             android:textSize="20sp"/>
     </RelativeLayout>
 
+    <include layout="@layout/light_gray_item_divider"/>
     <include layout="@layout/add_fragment_remark"/>
+
+    <com.qq281982108.tallylight.view.WrapView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp">
+
+        <com.qq281982108.tallylight.view.AddFragmentTime
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <include layout="@layout/add_fragment_user"/>
+
+        <include layout="@layout/add_fragment_merchant"/>
+
+        <include layout="@layout/add_fragment_refund"/>
+    </com.qq281982108.tallylight.view.WrapView>
 
 </LinearLayout>

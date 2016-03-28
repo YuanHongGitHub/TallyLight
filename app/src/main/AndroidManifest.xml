@@ -19,6 +19,7 @@
         <activity
             android:name=".activity.TallyLightActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -29,7 +30,10 @@
         <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"/>
+
+
     </application>
 
 </manifest>

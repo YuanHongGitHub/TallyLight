@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--LinearLayout的元素分隔器，用一个带有一个固有的width/height的Drawable组成-->
+<!--android:divider="@drawable/spacer_medium"
+              android:showDividers="middle"-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="rectangle">
+    <size
+        android:width="5dp"
+        android:height="5dp"/>
+
+    <solid android:color="@android:color/transparent"/>
+</shape>

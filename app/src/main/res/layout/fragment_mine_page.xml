@@ -7,9 +7,9 @@
     <include layout="@layout/top_bar"/>
 
 
-    <include layout="@layout/mine_page_item_divider"/>
+    <include layout="@layout/light_gray_item_divider"/>
 
-    <include layout="@layout/mine_page_item_divider_margin"/>
+    <include layout="@layout/light_gray_item_divider_margin"/>
 
     <RelativeLayout
         android:id="@+id/rl_mine_page_login_status"
@@ -46,9 +46,9 @@
             android:src="@drawable/arrow_little_right"/>
     </RelativeLayout>
 
-    <include layout="@layout/mine_page_item_divider"/>
+    <include layout="@layout/light_gray_item_divider"/>
 
-    <include layout="@layout/mine_page_item_divider_margin"/>
+    <include layout="@layout/light_gray_item_divider_margin"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -73,7 +73,7 @@
             android:text="主题皮肤"/>
     </RelativeLayout>
 
-    <include layout="@layout/mine_page_item_divider"/>
+    <include layout="@layout/light_gray_item_divider"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -97,7 +97,7 @@
             android:text="意见反馈"/>
     </RelativeLayout>
 
-    <include layout="@layout/mine_page_item_divider"/>
+    <include layout="@layout/light_gray_item_divider"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -121,9 +121,9 @@
             android:text="导出数据"/>
     </RelativeLayout>
 
-    <include layout="@layout/mine_page_item_divider"/>
+    <include layout="@layout/light_gray_item_divider"/>
 
-    <include layout="@layout/mine_page_item_divider_margin"/>
+    <include layout="@layout/light_gray_item_divider_margin"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -147,9 +147,9 @@
             android:text="分享APP"/>
     </RelativeLayout>
 
-    <include layout="@layout/mine_page_item_divider"/>
+    <include layout="@layout/light_gray_item_divider"/>
 
-    <include layout="@layout/mine_page_item_divider_margin"/>
+    <include layout="@layout/light_gray_item_divider_margin"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -174,7 +174,7 @@
             android:text="主题皮肤"/>
     </RelativeLayout>
 
-    <include layout="@layout/mine_page_item_divider"/>
+    <include layout="@layout/light_gray_item_divider"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -198,5 +198,5 @@
             android:text="导出数据"/>
     </RelativeLayout>
 
-    <include layout="@layout/mine_page_item_divider"/>
+    <include layout="@layout/light_gray_item_divider"/>
 </LinearLayout>

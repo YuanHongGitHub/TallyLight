@@ -4,12 +4,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qq281982108.tallylight.R;
@@ -36,7 +34,6 @@ public class AddPageFragment extends BaseFragment {
     private ViewPager mViewPager;
     private List<String> mDatas = Arrays.asList("支出", "收入", "转账", "借贷");
     private ViewPagerIndicator mIndicator;
-    private TextView tv_calendar;
     private RelativeLayout rl_calendar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,16 +46,12 @@ public class AddPageFragment extends BaseFragment {
         mViewPager.setAdapter(mAdapter);
         //设置关联的ViewPager
         mIndicator.setViewPager(mViewPager, 0);
-        Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
-        t.setToNow(); // 取得系统时间。
-        tv_calendar.setText("" + t.monthDay);
         return view;
     }
 
     private void initView(View v) {
         mViewPager = (ViewPager) v.findViewById(R.id.id_indicator_add_page_vp);
         mIndicator = (ViewPagerIndicator) v.findViewById(R.id.id_indicator_add_page);
-        tv_calendar = (TextView) v.findViewById(R.id.tv_calendar);
         rl_calendar = (RelativeLayout) v.findViewById(R.id.rl_calendar);
         rl_calendar.setOnClickListener(new View.OnClickListener() {
             @Override

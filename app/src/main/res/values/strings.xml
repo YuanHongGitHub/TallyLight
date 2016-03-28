@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">TallyLight</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="action_search">Search</string>
+    <string-array name="weeks">
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+        <item>星期日</item>
+    </string-array>
+
 </resources>
