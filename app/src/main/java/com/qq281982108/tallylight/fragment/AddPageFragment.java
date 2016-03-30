@@ -53,13 +53,6 @@ public class AddPageFragment extends BaseFragment {
         mViewPager = (ViewPager) v.findViewById(R.id.id_indicator_add_page_vp);
         mIndicator = (ViewPagerIndicator) v.findViewById(R.id.id_indicator_add_page);
         rl_calendar = (RelativeLayout) v.findViewById(R.id.rl_calendar);
-        rl_calendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                toast("rili");
-            }
-        });
     }
 
     private void initDatas() {

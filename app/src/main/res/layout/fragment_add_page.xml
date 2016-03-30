@@ -7,9 +7,7 @@
 
     <com.qq281982108.tallylight.view.TopBarRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </com.qq281982108.tallylight.view.TopBarRelativeLayout>
+        android:layout_height="wrap_content"/>
 
     <com.qq281982108.tallylight.view.ViewPagerIndicator
         android:id="@+id/id_indicator_add_page"
@@ -17,15 +15,13 @@
         android:layout_height="35dp"
         android:background="@color/colorLightBlue"
         android:orientation="horizontal"
-        yh:item_count="4">
-    </com.qq281982108.tallylight.view.ViewPagerIndicator>
+        yh:item_count="4"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/id_indicator_add_page_vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-    </android.support.v4.view.ViewPager>
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"

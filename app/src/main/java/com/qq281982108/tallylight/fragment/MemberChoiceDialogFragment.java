@@ -3,7 +3,6 @@ package com.qq281982108.tallylight.fragment;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -28,6 +27,7 @@ public class MemberChoiceDialogFragment extends DialogFragment implements View.O
     private TextView myself, spouse, children, parents, friends, family;
     private EditText et_other;
     private Button btn_other;
+    private OnMemberSelectedListener mListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,9 +115,16 @@ public class MemberChoiceDialogFragment extends DialogFragment implements View.O
     }
 
     private void send(String s) {
-        Intent intent = new Intent().setAction("android.basic.member");
-        intent.putExtra("member", s);
-        getActivity().sendBroadcast(intent);
+        if (s == null) return;
+        mListener.onSelect(getTag(), s);
         dismiss();
+    }
+
+    public void setOnMemberSelectedListener(OnMemberSelectedListener listener) {
+        mListener = listener;
+    }
+
+    public interface OnMemberSelectedListener {
+        void onSelect(String tag, String s);
     }
 }

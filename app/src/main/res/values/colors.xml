@@ -10,6 +10,7 @@
     <color name="colorLightGray">#c6c5c5</color>
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="popup_bg">#8f000000</color>
+    <color name="colorRed">#ff0000</color>
     <!--    <color name="colorGray">#777E7E7E</color>
         <color name="colorGray">#FF30B2E8</color>-->
 

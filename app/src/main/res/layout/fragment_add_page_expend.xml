@@ -7,22 +7,16 @@
               android:background="@color/colorWhite"
               android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/expend_ll_spending_amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical">
-
         <TextView
             android:id="@+id/expend_tv_spending_amount"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="15dp"
             android:text="0.00"
+            android:textColor="@color/colorRed"
             android:textSize="30sp"/>
-    </LinearLayout>
 
     <include layout="@layout/light_gray_item_divider"/>
     <RelativeLayout

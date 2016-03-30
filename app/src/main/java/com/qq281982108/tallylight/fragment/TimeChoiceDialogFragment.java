@@ -1,9 +1,6 @@
 package com.qq281982108.tallylight.fragment;
 
-import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,17 +20,27 @@ import com.qq281982108.tallylight.view.WheelView;
  * 修改备注：
  */
 public class TimeChoiceDialogFragment extends DialogFragment {
-    private int selectYear = AddPageExpendFragment.SELECT_YEAR;
-    private int selectMonth = AddPageExpendFragment.SELECT_MONTH;
-    private int selectDay = AddPageExpendFragment.SELECT_DAY;
-    private int selectHour = AddPageExpendFragment.SELECT_HOUR;
-    private int selectMinute = AddPageExpendFragment.SELECT_MINUTE;
+    private int[] time;
+    private int selectYear;
+    private int selectMonth;
+    private int selectDay;
+    private int selectHour;
+    private int selectMinute;
     private WheelView yearWheel;
     private WheelView monthWheel;
     private WheelView dayWheel;
     private WheelView leftWheel;
     private WheelView rightWheel;
     private Button mButton;
+    private OnTimeSelectedListener mListener;
+
+    public static TimeChoiceDialogFragment newInstance(int[] time) {
+        TimeChoiceDialogFragment timeChoiceDialogFragment = new TimeChoiceDialogFragment();
+        Bundle args = new Bundle();
+        args.putIntArray("time", time);
+        timeChoiceDialogFragment.setArguments(args);
+        return timeChoiceDialogFragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,12 @@ public class TimeChoiceDialogFragment extends DialogFragment {
         setCancelable(true);
         //可以设置dialog的显示风格
         setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+        time = getArguments().getIntArray("time");
+        selectYear = time[0];
+        selectMonth = time[1];
+        selectDay = time[2];
+        selectHour = time[3];
+        selectMinute = time[4];
     }
 
     @Override
@@ -70,16 +83,16 @@ public class TimeChoiceDialogFragment extends DialogFragment {
         leftWheel.setWheelStyle(WheelStyle.STYLE_HOUR);
         rightWheel.setWheelStyle(WheelStyle.STYLE_MINUTE);
 
-        yearWheel.setCurrentItem(AddPageExpendFragment.SELECT_YEAR - WheelStyle.minYear);
-        monthWheel.setCurrentItem(AddPageExpendFragment.SELECT_MONTH - 1);
-        dayWheel.setCurrentItem(AddPageExpendFragment.SELECT_DAY - 1);
-        leftWheel.setCurrentItem(AddPageExpendFragment.SELECT_HOUR);
-        rightWheel.setCurrentItem(AddPageExpendFragment.SELECT_MINUTE);
+        yearWheel.setCurrentItem(time[0] - WheelStyle.minYear);
+        monthWheel.setCurrentItem(time[1] - 1);
+        dayWheel.setCurrentItem(time[2] - 1);
+        leftWheel.setCurrentItem(time[3]);
+        rightWheel.setCurrentItem(time[4]);
 
         yearWheel.setOnSelectListener(new WheelView.onSelectListener() {
             @Override
             public void onSelect(int index, String text) {
-                if (index == AddPageExpendFragment.SELECT_YEAR - WheelStyle.minYear) return;
+                if (index == time[0] - WheelStyle.minYear) return;
                 selectYear = index + WheelStyle.minYear;
                 dayWheel.setWheelItemList(WheelStyle.createDayString(selectYear, selectMonth));
             }
@@ -89,7 +102,7 @@ public class TimeChoiceDialogFragment extends DialogFragment {
         monthWheel.setOnSelectListener(new WheelView.onSelectListener() {
             @Override
             public void onSelect(int index, String text) {
-                if (index == (AddPageExpendFragment.SELECT_MONTH - 1)) return;
+                if (index == (time[1] - 1)) return;
                 selectMonth = index + 1;
                 dayWheel.setWheelItemList(WheelStyle.createDayString(selectYear, selectMonth));
             }
@@ -98,21 +111,21 @@ public class TimeChoiceDialogFragment extends DialogFragment {
         dayWheel.setOnSelectListener(new WheelView.onSelectListener() {
             @Override
             public void onSelect(int index, String text) {
-                if (index == (AddPageExpendFragment.SELECT_DAY - 1)) return;
+                if (index == (time[2] - 1)) return;
                 selectDay = index + 1;
             }
         });
         leftWheel.setOnSelectListener(new WheelView.onSelectListener() {
             @Override
             public void onSelect(int index, String text) {
-                if (index == AddPageExpendFragment.SELECT_HOUR) return;
+                if (index == time[3]) return;
                 selectHour = index;
             }
         });
         rightWheel.setOnSelectListener(new WheelView.onSelectListener() {
             @Override
             public void onSelect(int index, String text) {
-                if (index == AddPageExpendFragment.SELECT_MINUTE) return;
+                if (index == time[4]) return;
                 selectMinute = index;
             }
         });
@@ -121,26 +134,20 @@ public class TimeChoiceDialogFragment extends DialogFragment {
 
     private void send() {
         Log.e("yh", "choice:" + selectYear + selectMonth + selectDay + selectHour + selectMinute);
-        AddPageExpendFragment.SELECT_YEAR = selectYear;
-        AddPageExpendFragment.SELECT_MONTH = selectMonth;
-        AddPageExpendFragment.SELECT_DAY = selectDay;
-        AddPageExpendFragment.SELECT_HOUR = selectHour;
-        AddPageExpendFragment.SELECT_MINUTE = selectMinute;
-        Intent intent = new Intent().setAction("android.basic.msg");
-        getActivity().sendBroadcast(intent);
+        time[0] = selectYear;
+        time[1] = selectMonth;
+        time[2] = selectDay;
+        time[3] = selectHour;
+        time[4] = selectMinute;
+        mListener.onSelect(getTag(), time);
         dismiss();
     }
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return super.onCreateDialog(savedInstanceState);
-
+    public void setOnTimeSelectedListener(OnTimeSelectedListener listener) {
+        mListener = listener;
     }
 
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-//        OnTimeSelectListener mListener = (OnTimeSelectListener) getActivity();
-
+    public interface OnTimeSelectedListener {
+        void onSelect(String tag, int[] ints);
     }
 }

@@ -6,9 +6,7 @@
 
     <com.qq281982108.tallylight.view.TopBarRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </com.qq281982108.tallylight.view.TopBarRelativeLayout>
+        android:layout_height="wrap_content"/>
 
     <ScrollView
         android:layout_width="match_parent"

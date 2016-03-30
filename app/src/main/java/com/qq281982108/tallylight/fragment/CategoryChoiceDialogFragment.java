@@ -1,9 +1,6 @@
 package com.qq281982108.tallylight.fragment;
 
-import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -34,6 +31,7 @@ public class CategoryChoiceDialogFragment extends DialogFragment implements View
     private int a = -1;
     private int main_postion = -1;
     private int list_id;
+    private OnCategorySelectedListener mListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,6 +108,8 @@ public class CategoryChoiceDialogFragment extends DialogFragment implements View
                     main_postion = get_id;
                 }
                 list_id = a + position;
+                mListener.onSelect(ClassifyMore[main_postion][position]);
+                dismiss();
 //                Bundle bundle = new Bundle();
 //                bundle.putInt("list_id", list_id);
 //                bundle.putString("list_item", ClassifyMore[main_postion][position]);
@@ -127,17 +127,6 @@ public class CategoryChoiceDialogFragment extends DialogFragment implements View
     }
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return super.onCreateDialog(savedInstanceState);
-
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         DisplayMetrics dm = new DisplayMetrics();
@@ -145,42 +134,20 @@ public class CategoryChoiceDialogFragment extends DialogFragment implements View
         getDialog().getWindow().setLayout(dm.widthPixels, dm.heightPixels / 2);
     }
 
-    private void send(String s, String ss) {
-        Intent intent = new Intent().setAction("android.basic.category");
-        intent.putExtra("category0", s);
-        intent.putExtra("category1", ss);
-        getActivity().sendBroadcast(intent);
-        dismiss();
+    public void setOnCategorySelectedListener(OnCategorySelectedListener listener) {
+        mListener = listener;
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.myself:
-//                Log.e("yh",""+myself.getText());
-//                send((String) myself.getText());
-//                break;
-//            case R.id.spouse:
-//                send((String) spouse.getText());
-//                break;
-//            case R.id.children:
-//                send((String) children.getText());
-//                break;
-//            case R.id.parents:
-//                send((String) parents.getText());
-//                break;
-//            case R.id.friends:
-//                send((String) friends.getText());
-//                break;
-//            case R.id.family:
-//                send((String) family.getText());
-//                break;
-//            case R.id.btn_other:
-//                send(et_other.getText().toString());
-//                break;
             default:
                 break;
         }
+    }
+
+    public interface OnCategorySelectedListener {
+        void onSelect(String s);
     }
 
 }
