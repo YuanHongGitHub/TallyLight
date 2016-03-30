@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="main">
+        <item>餐饮</item>
+        <item>交通</item>
+        <item>购物</item>
+        <item>娱乐</item>
+        <item>医教</item>
+        <item>居家</item>
+        <item>投资</item>
+        <item>人情</item>
+        <item>生意</item>
+    </string-array>
+
+    <string-array name="more_0">
+        <item>早餐</item>
+        <item>午餐</item>
+        <item>晚餐</item>
+        <item>饮料水果</item>
+        <item>零食</item>
+        <item>买菜原料</item>
+        <item>夜宵</item>
+        <item>油盐酱醋</item>
+        <item>餐饮其他</item>
+    </string-array>
+
+    <string-array name="more_1">
+        <item>公交</item>
+        <item>出租</item>
+        <item>加油</item>
+        <item>停车费</item>
+        <item>地铁</item>
+        <item>火车</item>
+        <item>长途汽车</item>
+        <item>过路过桥</item>
+        <item>保养维修</item>
+        <item>飞机</item>
+        <item>车款车贷</item>
+        <item>罚款赔偿</item>
+        <item>车险</item>
+        <item>自行车</item>
+        <item>船舶</item>
+        <item>交通其他</item>
+    </string-array>
+
+    <string-array name="more_2">
+        <item>服饰鞋包</item>
+        <item>家居百货</item>
+        <item>烟酒</item>
+        <item>化妆护肤</item>
+        <item>电子数码</item>
+        <item>宝宝用品</item>
+        <item>家居家纺</item>
+        <item>报刊书籍</item>
+        <item>电器</item>
+        <item>珠宝首饰</item>
+        <item>文具玩具</item>
+        <item>保健用品</item>
+        <item>摄影文印</item>
+        <item>购物其他</item>
+    </string-array>
+
+    <string-array name="more_3">
+        <item>住宿</item>
+        <item>红包</item>
+        <item>旅游度假</item>
+        <item>网游电玩</item>
+        <item>电影</item>
+        <item>洗浴足浴</item>
+        <item>运动健身</item>
+        <item>卡拉OK</item>
+        <item>茶酒咖啡</item>
+        <item>歌舞演出</item>
+        <item>娱乐其他</item>
+        <item>电视</item>
+        <item>花鸟宠物</item>
+        <item>麻将棋牌</item>
+        <item>聚会玩乐</item>
+    </string-array>
+
+    <string-array name="more_4">
+        <item>医疗用品</item>
+        <item>挂号门诊</item>
+        <item>养生保健</item>
+        <item>住院费</item>
+        <item>养老院</item>
+        <item>学杂教材</item>
+        <item>培训考试</item>
+        <item>家教补习</item>
+        <item>学费</item>
+        <item>幼儿教育</item>
+        <item>出国留学</item>
+        <item>助学贷款</item>
+        <item>医教其他</item>
+    </string-array>
+
+    <string-array name="more_5">
+        <item>手机电话</item>
+        <item>房款房贷</item>
+        <item>水电燃气</item>
+        <item>美发美容</item>
+        <item>住宿房租</item>
+        <item>材料建材</item>
+        <item>电脑宽带</item>
+        <item>快递邮政</item>
+        <item>物业</item>
+        <item>家政服务</item>
+        <item>生活费</item>
+        <item>婚庆摄影</item>
+        <item>漏记款</item>
+        <item>保险费</item>
+        <item>消费贷款</item>
+        <item>税费手续费</item>
+        <item>生活其他</item>
+    </string-array>
+
+    <string-array name="more_6">
+        <item>股票</item>
+        <item>基金</item>
+        <item>理财产品</item>
+        <item>银行贷款</item>
+        <item>保险</item>
+        <item>P2P</item>
+        <item>证券期货</item>
+        <item>出资</item>
+        <item>贵金属</item>
+        <item>投资贷款</item>
+        <item>外汇</item>
+        <item>收藏品</item>
+        <item>利息支出</item>
+        <item>投资其他</item>
+    </string-array>
+
+    <string-array name="more_7">
+        <item>礼金红包</item>
+        <item>物品</item>
+        <item>请客</item>
+        <item>代付款</item>
+        <item>孝敬</item>
+        <item>给予</item>
+        <item>慈善捐款</item>
+        <item>人情其他</item>
+    </string-array>
+
+    <string-array name="more_8">
+        <item>进货采购</item>
+        <item>人工支出</item>
+        <item>材料辅料</item>
+        <item>工程付款</item>
+        <item>交通运输</item>
+        <item>运营费</item>
+        <item>会务费</item>
+        <item>办公费用</item>
+        <item>营销广告</item>
+        <item>店面租金</item>
+        <item>注册登记</item>
+        <item>生意其他</item>
+    </string-array>
+
+</resources>

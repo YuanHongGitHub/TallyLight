@@ -20,10 +20,10 @@ import java.util.List;
  * 项目名称：TallyLight
  * 创建人：yh
  * 创建时间：2016-03-23 18:05
- * 类名：MyAdapter
+ * 类名：TimeLineAdapter
  * 修改备注：
  */
-public class MyAdapter extends BaseExpandableListAdapter {
+public class TimeLineAdapter extends BaseExpandableListAdapter {
     SwipeLayout currentExpandedSwipeLayout;
     private LayoutInflater inflater = null;
     private List<GroupEntity> groupList;
@@ -35,7 +35,7 @@ public class MyAdapter extends BaseExpandableListAdapter {
      * @param context
      * @param group_list
      */
-    public MyAdapter(Context context, List<GroupEntity> group_list) {
+    public TimeLineAdapter(Context context, List<GroupEntity> group_list) {
         this.context = context;
         this.groupList = group_list;
         inflater = (LayoutInflater) context

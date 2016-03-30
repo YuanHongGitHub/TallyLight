@@ -66,7 +66,6 @@ public class TallyLightActivity extends BaseActivity implements View.OnClickList
         // 获取事务处理的FragmentTransaction，FragmentTransaction的相关api可以对fragment进行添加、移除、隐藏、显示等操作
         fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-
         // 初始化时先看listFragments[0](即首页HomePageFragment)是否已经被添加
         // 如果没有添加，则通过FragmentTransaction向activity提交一个添加HomePageFragment的事务
         // 如果已经添加过，则通过FragmentTransaction向activity提交隐藏之前fragment并显示HomePageFragment的请求

@@ -11,4 +11,5 @@
         <item>星期日</item>
     </string-array>
 
+    <string name="no_data">没有符合的</string>
 </resources>

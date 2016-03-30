@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
 import com.qq281982108.tallylight.R;
-import com.qq281982108.tallylight.adapter.MyAdapter;
+import com.qq281982108.tallylight.adapter.TimeLineAdapter;
 import com.qq281982108.tallylight.model.ChildEntity;
 import com.qq281982108.tallylight.model.GroupEntity;
 
@@ -26,7 +26,7 @@ import java.util.List;
 public class TimeLineFragment extends Fragment {
     private ExpandableListView expandableListView;
     private List<GroupEntity> lists;
-    private MyAdapter adapter;
+    private TimeLineAdapter adapter;
 
     @Nullable
     @Override
@@ -38,7 +38,7 @@ public class TimeLineFragment extends Fragment {
 
     private void initView(View view) {
         lists = initList();
-        adapter = new MyAdapter(getActivity(), lists);
+        adapter = new TimeLineAdapter(getActivity(), lists);
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         expandableListView.setAdapter(adapter);
         expandableListView.setGroupIndicator(null); // 去掉默认带的箭头

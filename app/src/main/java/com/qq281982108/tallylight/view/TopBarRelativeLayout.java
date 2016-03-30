@@ -1,6 +1,7 @@
 package com.qq281982108.tallylight.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.format.Time;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qq281982108.tallylight.R;
+import com.qq281982108.tallylight.activity.MyCalendarActivity;
 
 /**
  * 项目名称：TallyLight
@@ -51,7 +53,7 @@ public class TopBarRelativeLayout extends RelativeLayout implements View.OnClick
                 break;
             case R.id.rl_calendar:
                 //TODO
-                Log.e("yh", "rl_calendar");
+                getContext().startActivity(new Intent(getContext(), MyCalendarActivity.class));
             default:
                 break;
         }

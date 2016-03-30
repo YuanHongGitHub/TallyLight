@@ -5,7 +5,11 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/top_bar_calendar"/>
+    <com.qq281982108.tallylight.view.TopBarRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.qq281982108.tallylight.view.TopBarRelativeLayout>
 
     <com.qq281982108.tallylight.view.ViewPagerIndicator
         android:id="@+id/id_indicator_add_page"

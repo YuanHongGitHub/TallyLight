@@ -1,10 +1,15 @@
 package com.qq281982108.tallylight.fragment;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.qq281982108.tallylight.R;
 import com.qq281982108.tallylight.view.WheelStyle;
@@ -18,13 +23,17 @@ import com.qq281982108.tallylight.view.WheelView;
  * 修改备注：
  */
 public class TimeChoiceDialogFragment extends DialogFragment {
-    int selectYear;
-    int selectMonth;
+    private int selectYear = AddPageExpendFragment.SELECT_YEAR;
+    private int selectMonth = AddPageExpendFragment.SELECT_MONTH;
+    private int selectDay = AddPageExpendFragment.SELECT_DAY;
+    private int selectHour = AddPageExpendFragment.SELECT_HOUR;
+    private int selectMinute = AddPageExpendFragment.SELECT_MINUTE;
     private WheelView yearWheel;
     private WheelView monthWheel;
     private WheelView dayWheel;
     private WheelView leftWheel;
     private WheelView rightWheel;
+    private Button mButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,33 +49,98 @@ public class TimeChoiceDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View rootView = inflater.inflate(R.layout.activity_time_choice, null);
+        View rootView = inflater.inflate(R.layout.dialog_fragment_time_choice, null);
         yearWheel = (WheelView) rootView.findViewById(R.id.select_date_wheel_year_wheel);
         monthWheel = (WheelView) rootView.findViewById(R.id.select_date_month_wheel);
         dayWheel = (WheelView) rootView.findViewById(R.id.select_date_day_wheel);
         leftWheel = (WheelView) rootView.findViewById(R.id.select_time_wheel_left);
         rightWheel = (WheelView) rootView.findViewById(R.id.select_time_wheel_right);
+
+        mButton = (Button) rootView.findViewById(R.id.time_choice_dialog_btn);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send();
+            }
+        });
+
+        yearWheel.setWheelStyle(WheelStyle.STYLE_YEAR);
+        monthWheel.setWheelStyle(WheelStyle.STYLE_MONTH);
+        dayWheel.setWheelStyle(WheelStyle.STYLE_DAY);
         leftWheel.setWheelStyle(WheelStyle.STYLE_HOUR);
         rightWheel.setWheelStyle(WheelStyle.STYLE_MINUTE);
-        yearWheel.setWheelStyle(WheelStyle.STYLE_YEAR);
-        leftWheel.setCurrentItem(12);
-        rightWheel.setCurrentItem(12);
+
+        yearWheel.setCurrentItem(AddPageExpendFragment.SELECT_YEAR - WheelStyle.minYear);
+        monthWheel.setCurrentItem(AddPageExpendFragment.SELECT_MONTH - 1);
+        dayWheel.setCurrentItem(AddPageExpendFragment.SELECT_DAY - 1);
+        leftWheel.setCurrentItem(AddPageExpendFragment.SELECT_HOUR);
+        rightWheel.setCurrentItem(AddPageExpendFragment.SELECT_MINUTE);
+
         yearWheel.setOnSelectListener(new WheelView.onSelectListener() {
             @Override
             public void onSelect(int index, String text) {
+                if (index == AddPageExpendFragment.SELECT_YEAR - WheelStyle.minYear) return;
                 selectYear = index + WheelStyle.minYear;
                 dayWheel.setWheelItemList(WheelStyle.createDayString(selectYear, selectMonth));
             }
         });
 
-        monthWheel.setWheelStyle(WheelStyle.STYLE_MONTH);
+
         monthWheel.setOnSelectListener(new WheelView.onSelectListener() {
             @Override
             public void onSelect(int index, String text) {
+                if (index == (AddPageExpendFragment.SELECT_MONTH - 1)) return;
                 selectMonth = index + 1;
                 dayWheel.setWheelItemList(WheelStyle.createDayString(selectYear, selectMonth));
             }
         });
+
+        dayWheel.setOnSelectListener(new WheelView.onSelectListener() {
+            @Override
+            public void onSelect(int index, String text) {
+                if (index == (AddPageExpendFragment.SELECT_DAY - 1)) return;
+                selectDay = index + 1;
+            }
+        });
+        leftWheel.setOnSelectListener(new WheelView.onSelectListener() {
+            @Override
+            public void onSelect(int index, String text) {
+                if (index == AddPageExpendFragment.SELECT_HOUR) return;
+                selectHour = index;
+            }
+        });
+        rightWheel.setOnSelectListener(new WheelView.onSelectListener() {
+            @Override
+            public void onSelect(int index, String text) {
+                if (index == AddPageExpendFragment.SELECT_MINUTE) return;
+                selectMinute = index;
+            }
+        });
         return rootView;
+    }
+
+    private void send() {
+        Log.e("yh", "choice:" + selectYear + selectMonth + selectDay + selectHour + selectMinute);
+        AddPageExpendFragment.SELECT_YEAR = selectYear;
+        AddPageExpendFragment.SELECT_MONTH = selectMonth;
+        AddPageExpendFragment.SELECT_DAY = selectDay;
+        AddPageExpendFragment.SELECT_HOUR = selectHour;
+        AddPageExpendFragment.SELECT_MINUTE = selectMinute;
+        Intent intent = new Intent().setAction("android.basic.msg");
+        getActivity().sendBroadcast(intent);
+        dismiss();
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        return super.onCreateDialog(savedInstanceState);
+
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+//        OnTimeSelectListener mListener = (OnTimeSelectListener) getActivity();
+
     }
 }

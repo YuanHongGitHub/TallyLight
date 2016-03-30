@@ -29,5 +29,6 @@
         android:layout_height="20dp"
         android:gravity="center"
         android:text="不重复"
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        android:visibility="gone"/>
 </LinearLayout>

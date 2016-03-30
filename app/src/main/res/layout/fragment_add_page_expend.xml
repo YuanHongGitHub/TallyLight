@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:id="@+id/fragment_add_page_expend"
+    xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/colorWhite"
@@ -99,11 +101,9 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp">
 
-        <com.qq281982108.tallylight.view.AddFragmentTime
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <include layout="@layout/add_fragment_time"/>
 
-        <include layout="@layout/add_fragment_user"/>
+        <include layout="@layout/add_fragment_member"/>
 
         <include layout="@layout/add_fragment_merchant"/>
 
