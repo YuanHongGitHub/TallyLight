@@ -11,10 +11,11 @@
             android:id="@+id/expend_tv_spending_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:paddingBottom="15dp"
             android:paddingLeft="20dp"
             android:paddingTop="15dp"
-            android:text="0.00"
+            android:text="0.0"
             android:textColor="@color/colorRed"
             android:textSize="30sp"/>
 

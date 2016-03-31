@@ -110,12 +110,6 @@ public class CategoryChoiceDialogFragment extends DialogFragment implements View
                 list_id = a + position;
                 mListener.onSelect(ClassifyMore[main_postion][position]);
                 dismiss();
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("list_id", list_id);
-//                bundle.putString("list_item", ClassifyMore[main_postion][position]);
-//                Intent intent = new Intent(DoubleListActivity.this,ResultActivity.class);
-//                intent.putExtras(bundle);
-//                startActivity(intent);
             }
         });
     }
