@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.qq281982108.tallylight.R;
-import com.qq281982108.tallylight.activity.LoginActivity;
 
 /**
  * 项目名称：TallyLight
@@ -17,7 +16,9 @@ import com.qq281982108.tallylight.activity.LoginActivity;
  * 修改备注：
  */
 public class MinePageFragment extends BaseFragment implements View.OnClickListener {
+    LoginDialogFragment mLoginDialogFragment = new LoginDialogFragment();
     private RelativeLayout mLoginStatusRL;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -36,7 +37,7 @@ public class MinePageFragment extends BaseFragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.rl_mine_page_login_status:
                 //TODO
-                LoginActivity.actionStart(getActivity(), "test1", "test2");
+                mLoginDialogFragment.show(getActivity().getFragmentManager(), "login");
                 break;
             default:
                 break;

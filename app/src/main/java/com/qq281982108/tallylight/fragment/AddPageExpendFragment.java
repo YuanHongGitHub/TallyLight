@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.qq281982108.tallylight.R;
+import com.qq281982108.tallylight.util.CalculatorUtil;
 import com.qq281982108.tallylight.util.TimeUtils;
 import com.qq281982108.tallylight.view.CalculatorPopupWindow;
 
@@ -28,7 +29,7 @@ public class AddPageExpendFragment extends BaseFragment
         TimeChoiceDialogFragment.OnTimeSelectedListener,
         MemberChoiceDialogFragment.OnMemberSelectedListener,
         CategoryChoiceDialogFragment.OnCategorySelectedListener,
-        CalculatorPopupWindow.OnCalculatorListener {
+        CalculatorUtil.CalculatorUtilListener {
     public int[] time = new int[5];
     boolean hasPause = false;
     private TextView mMoneyTV, mSelectTimeTV, mSelectMemberTV, mSelectCategoryTV;
@@ -109,7 +110,6 @@ public class AddPageExpendFragment extends BaseFragment
         editor.apply();
         Log.e("yh", "onPause");
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -118,7 +118,8 @@ public class AddPageExpendFragment extends BaseFragment
                     mCalculatorPopupWindow = new CalculatorPopupWindow(getContext());
                     mCalculatorPopupWindow.setHeight(popHeight);
                 }
-                mCalculatorPopupWindow.setOnCalculatorListener(this);
+                CalculatorUtil.setCalculatorUtilListener(this);
+//                mCalculatorPopupWindow.setOnCalculatorListener(this);
                 mCalculatorPopupWindow.showAtLocation(getView(), Gravity.CENTER, 0, popHeight / 2);
                 break;
             case R.id.ll_add_fragment_time:

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 
 import com.qq281982108.tallylight.R;
+import com.qq281982108.tallylight.util.CalculatorUtil;
 
 /**
  * 项目名称：TallyLight
@@ -21,24 +22,16 @@ import com.qq281982108.tallylight.R;
  * 修改备注：
  */
 public class CalculatorPopupWindow extends PopupWindow implements View.OnClickListener {
-    StringBuffer numZero, numResult, numFirst, numSecond;
-    boolean isHadDot = false;
-    boolean isDivided, isMultiplied, isSubtracted, isAdded, dotIsFirst, dotIsFirstCleared;
-    int dotLength = 0;
-    Double result = 0.0;
+    CalculatorUtil mCalculatorUtil = new CalculatorUtil();
     private int mWidth;
     private int mHeight;
-    private View mConvertView;
     private Button btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9, btn_dot, btn_back,
             btn_divide, btn_multiply, btn_subtract, btn_add,//除乘减加
             btn_clear, btn_result, btn_confirm, btn_plus_minus;//清空、结果、确认提交、正负
-    private OnCalculatorListener mListener;
-
     public CalculatorPopupWindow(Context context) {
         calWidthAndHeight(context);
-
-        mConvertView = LayoutInflater.from(context).inflate(R.layout.popwindow_layout, null);
-        setContentView(mConvertView);
+        View convertView = LayoutInflater.from(context).inflate(R.layout.popwindow_layout, null);
+        setContentView(convertView);
         setWidth(mWidth);
         setHeight(mHeight);
         setOutsideTouchable(false);
@@ -54,7 +47,7 @@ public class CalculatorPopupWindow extends PopupWindow implements View.OnClickLi
                 return false;
             }
         });
-        initViews(mConvertView);
+        initViews(convertView);
         initEvent();
     }
 
@@ -117,254 +110,68 @@ public class CalculatorPopupWindow extends PopupWindow implements View.OnClickLi
         btn_dot.setOnClickListener(this);
         btn_confirm.setOnClickListener(this);
         btn_plus_minus.setOnClickListener(this);
-        numZero = new StringBuffer("0");
-        numFirst = new StringBuffer();
-        numSecond = new StringBuffer();
-        numResult = new StringBuffer();
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.calculator_0:
-                if (numFirst.length() != 0) {
-                    sbAppend(0);
+                if (mCalculatorUtil.numFirst.length() != 0) {
+                    mCalculatorUtil.sbAppend(0);
                 }
                 break;
             case R.id.calculator_1:
-                sbAppend(1);
+                mCalculatorUtil.sbAppend(1);
                 break;
             case R.id.calculator_2:
-                sbAppend(2);
+                mCalculatorUtil.sbAppend(2);
                 break;
             case R.id.calculator_3:
-                sbAppend(3);
+                mCalculatorUtil.sbAppend(3);
                 break;
             case R.id.calculator_4:
-                sbAppend(4);
+                mCalculatorUtil.sbAppend(4);
                 break;
             case R.id.calculator_5:
-                sbAppend(5);
+                mCalculatorUtil.sbAppend(5);
                 break;
             case R.id.calculator_6:
-                sbAppend(6);
+                mCalculatorUtil.sbAppend(6);
                 break;
             case R.id.calculator_7:
-                sbAppend(7);
+                mCalculatorUtil.sbAppend(7);
                 break;
             case R.id.calculator_8:
-                sbAppend(8);
+                mCalculatorUtil.sbAppend(8);
                 break;
             case R.id.calculator_9:
-                sbAppend(9);
+                mCalculatorUtil.sbAppend(9);
                 break;
             case R.id.calculator_dot:
-                if (!isHadDot) {
-                    dotLength++;
-                    isHadDot = true;
-                    if (numFirst.length() == 0) {
-                        dotIsFirst = true;
-                        sbAppend(0);
-                        dotLength--;
-                    }
-                    mListener.onCalculated(numFirst.append("."));
-                }
+                mCalculatorUtil.dot();
                 break;
             case R.id.calculator_back://返回一位
-                if (numFirst.length() > 1) {
-                    if (dotLength > 2) {
-                        dotLength--;
-                        numFirst.deleteCharAt(numFirst.length() - 1);
-                    } else if (dotLength == 2) {
-                        isHadDot = false;
-                        dotLength = 0;
-                        if (dotIsFirst) {
-                            numFirst.delete(numFirst.length() - 3, numFirst.length());
-                            dotIsFirstCleared = true;
-                        } else {
-                            numFirst.delete(numFirst.length() - 2, numFirst.length());
-                        }
-                    } else {
-                        numFirst.deleteCharAt(numFirst.length() - 1);
-                    }
-                    if (dotIsFirstCleared) {
-                        mListener.onCalculated(numZero);
-                        dotIsFirst = false;
-                        dotIsFirstCleared = false;
-                    } else {
-                        mListener.onCalculated(numFirst);
-                    }
-                } else {
-                    if (numFirst.length() != 0) {
-                        numFirst.deleteCharAt(numFirst.length() - 1);
-                    }
-                    mListener.onCalculated(numZero);
-                    Log.e("yh", "numZero.toString()" + numZero.toString());
-                }
-                Log.e("yh", "numFirst.toString()" + numFirst.toString());
+                mCalculatorUtil.back();
                 break;
             case R.id.calculator_clear://清除所有
-                if (numFirst.length() != 0) {
-                    mListener.onCalculated(numFirst.delete(0, numFirst.length()));
-                }
-                mListener.onCalculated(numZero);
-                result = 0.0;
-                dotLength = 0;
-                isHadDot = false;
-                dotIsFirst = false;
-                dotIsFirstCleared = false;
+                mCalculatorUtil.clear();
                 break;
             case R.id.calculator_add://加
-                isAdded = true;
-                isSubtracted = isDivided = isMultiplied = false;
-                isHadDot = false;
-                dotLength = 0;
-                if (numFirst.length() != 0) {
-                    if (result == 0.0) {
-                        numResult = numFirst;
-                        Log.e("yh", "" + numResult.length());
-                        result = Double.valueOf(numResult.toString().trim());
-                    } else {
-                        numResult = numFirst;
-                        result += Double.valueOf(numFirst.toString().trim());
-                        result = (double) Math.round(result * 100) / 100;
-                        mListener.onCalculated(result.toString());
-                    }
-                    numFirst.delete(0, numFirst.length());
-                }
+                mCalculatorUtil.add();
                 break;
             case R.id.calculator_subtract://减
-                isSubtracted = true;
-                isAdded = isDivided = isMultiplied = false;
-                isHadDot = false;
-                dotLength = 0;
-                if (numFirst.length() != 0) {
-                    if (!numFirst.toString().equals("-")) {
-                        if (result == 0.0) {
-                            numResult = numFirst;
-                            Log.e("yh", "" + numResult.length());
-                            result = Double.valueOf(numResult.toString().trim());
-                        } else {
-                            numResult = numFirst;
-                            result -= Double.valueOf(numFirst.toString().trim());
-                            result = (double) Math.round(result * 100) / 100;
-                            mListener.onCalculated(result.toString());
-                        }
-                        numFirst.delete(0, numFirst.length());
-                    }
-                } else if (result == 0.0) {
-                    Log.e("yh", "--------" + numResult.length());
-                    numFirst.append("-");
-                }
+                mCalculatorUtil.subtract();
                 break;
             case R.id.calculator_multiply://乘
-                isMultiplied = true;
-                isAdded = isDivided = isSubtracted = false;
-                isHadDot = false;
-                dotLength = 0;
-                if (numFirst.length() != 0) {
-                    if (result == 0.0) {
-                        numResult = numFirst;
-                        Log.e("yh", "" + numResult.length());
-                        result = Double.valueOf(numResult.toString().trim());
-                    } else {
-                        numResult = numFirst;
-                        result = result * Double.valueOf(numFirst.toString().trim());
-                        result = (double) Math.round(result * 100) / 100;
-                        mListener.onCalculated(result.toString());
-                    }
-                    numFirst.delete(0, numFirst.length());
-                }
+                mCalculatorUtil.multiply();
                 break;
             case R.id.calculator_divide://除
-                isDivided = true;
-                isAdded = isMultiplied = isSubtracted = false;
-                isHadDot = false;
-                dotLength = 0;
-                if (numFirst.length() != 0) {
-                    if (result == 0.0) {
-                        numResult = numFirst;
-                        Log.e("yh", "" + numResult.length());
-                        result = Double.valueOf(numResult.toString().trim());
-                    } else if (result != 0) {
-                        numResult = numFirst;
-                        result = result / Double.valueOf(numFirst.toString().trim());
-                        result = (double) Math.round(result * 100) / 100;
-                        mListener.onCalculated(result.toString());
-                    }
-                    numFirst.delete(0, numFirst.length());
-                }
+                mCalculatorUtil.divide();
                 break;
             case R.id.calculator_result://等于
-                if (isAdded) {
-                    if (numFirst.length() != 0) {
-                        if (result == 0.0) {
-                            numResult = numFirst;
-                            Log.e("yh", "" + numResult.length());
-                            result = Double.valueOf(numResult.toString().trim());
-                        } else {
-                            numResult = numFirst;
-                            result += Double.valueOf(numFirst.toString().trim());
-                            result = (double) Math.round(result * 100) / 100;
-                            mListener.onCalculated(result.toString());
-                        }
-                        numFirst.delete(0, numFirst.length());
-                    }
-                }
-                if (isSubtracted) {
-                    if (numFirst.length() != 0) {
-                        if (!numFirst.toString().equals("-")) {
-                            if (result == 0.0) {
-                                numResult = numFirst;
-                                Log.e("yh", "" + numResult.length());
-                                result = Double.valueOf(numResult.toString().trim());
-                            } else {
-                                numResult = numFirst;
-                                result -= Double.valueOf(numFirst.toString().trim());
-                                result = (double) Math.round(result * 100) / 100;
-                                mListener.onCalculated(result.toString());
-                            }
-                            numFirst.delete(0, numFirst.length());
-                        }
-                    } else if (result == 0.0) {
-                        Log.e("yh", "--------" + numResult.length());
-                        numFirst.append("-");
-                    }
-                }
-                if (isMultiplied) {
-                    if (numFirst.length() != 0) {
-                        if (result == 0.0) {
-                            numResult = numFirst;
-                            Log.e("yh", "" + numResult.length());
-                            result = Double.valueOf(numResult.toString().trim());
-                        } else {
-                            numResult = numFirst;
-                            result = result * Double.valueOf(numFirst.toString().trim());
-                            result = (double) Math.round(result * 100) / 100;
-                            mListener.onCalculated(result.toString());
-                        }
-                        numFirst.delete(0, numFirst.length());
-                    }
-                }
-                if (isDivided) {
-                    if (numFirst.length() != 0) {
-                        if (result == 0.0) {
-                            numResult = numFirst;
-                            Log.e("yh", "" + numResult.length());
-                            result = Double.valueOf(numResult.toString().trim());
-                        } else if (result != 0) {
-                            numResult = numFirst;
-                            result = result / Double.valueOf(numFirst.toString().trim());
-                            result = (double) Math.round(result * 100) / 100;
-                            mListener.onCalculated(result.toString());
-                        }
-                        numFirst.delete(0, numFirst.length());
-                    }
-                }
-                isAdded = isDivided = isMultiplied = isSubtracted = false;
+                mCalculatorUtil.result();
                 break;
             case R.id.calculator_confirm://确认提交
-                if (!result.toString().contains("-")) {
+                if (!mCalculatorUtil.result.toString().contains("-")) {
                     dismiss();
                 }
                 break;
@@ -375,24 +182,4 @@ public class CalculatorPopupWindow extends PopupWindow implements View.OnClickLi
         }
     }
 
-    private void sbAppend(int num) {
-        if (isHadDot) {
-            if (dotLength < 3) {
-                dotLength++;
-                mListener.onCalculated(numFirst.append(num));
-            }
-        } else {
-            mListener.onCalculated(numFirst.append(num));
-        }
-    }
-
-    public void setOnCalculatorListener(OnCalculatorListener listener) {
-        mListener = listener;
-    }
-
-    public interface OnCalculatorListener {
-        void onCalculated(StringBuffer stringBuffer);
-
-        void onCalculated(String result);
-    }
 }

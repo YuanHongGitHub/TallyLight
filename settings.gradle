@@ -1,1 +1,1 @@
-include ':app', ':flyrefresh', ':datepicker'
+include ':app', ':flyrefresh'

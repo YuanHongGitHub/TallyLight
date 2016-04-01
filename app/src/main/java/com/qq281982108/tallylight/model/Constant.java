@@ -8,5 +8,5 @@ package com.qq281982108.tallylight.model;
  * 修改备注：
  */
 public class Constant {
-    public static final String BmobAppID = "7266c0800e80ff6fd98a36067861bfe4";
+    public static final String BmobAppID = "8587289e5f01a4b9c4e03e97f72dcd57";
 }

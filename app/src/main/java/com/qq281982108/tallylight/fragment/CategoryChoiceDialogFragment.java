@@ -46,7 +46,6 @@ public class CategoryChoiceDialogFragment extends DialogFragment implements View
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View rootView = inflater.inflate(R.layout.doublelist_layout, null);
         initdata();
         init(rootView);
