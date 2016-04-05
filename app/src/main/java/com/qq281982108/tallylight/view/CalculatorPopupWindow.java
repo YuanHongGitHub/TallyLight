@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 
 import com.qq281982108.tallylight.R;
 import com.qq281982108.tallylight.util.CalculatorUtil;
+import com.qq281982108.tallylight.util.ToastUtils;
 
 /**
  * 项目名称：TallyLight
@@ -23,12 +24,14 @@ import com.qq281982108.tallylight.util.CalculatorUtil;
  */
 public class CalculatorPopupWindow extends PopupWindow implements View.OnClickListener {
     CalculatorUtil mCalculatorUtil = new CalculatorUtil();
+    private Context mContext;
     private int mWidth;
     private int mHeight;
     private Button btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9, btn_dot, btn_back,
             btn_divide, btn_multiply, btn_subtract, btn_add,//除乘减加
             btn_clear, btn_result, btn_confirm, btn_plus_minus;//清空、结果、确认提交、正负
     public CalculatorPopupWindow(Context context) {
+        mContext = context;
         calWidthAndHeight(context);
         View convertView = LayoutInflater.from(context).inflate(R.layout.popwindow_layout, null);
         setContentView(convertView);
@@ -172,10 +175,12 @@ public class CalculatorPopupWindow extends PopupWindow implements View.OnClickLi
                 break;
             case R.id.calculator_confirm://确认提交
                 if (!mCalculatorUtil.result.toString().contains("-")) {
+                    mCalculatorUtil.confirm();
                     dismiss();
-                }
+                } else ToastUtils.ToastMessage(mContext, "请输入正值");
                 break;
             case R.id.calculator_plus_minus://正负值
+                mCalculatorUtil.plus_minus();
                 break;
             default:
                 break;

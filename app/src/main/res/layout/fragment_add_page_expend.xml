@@ -2,24 +2,25 @@
 <LinearLayout
     android:id="@+id/fragment_add_page_expend"
     xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/colorWhite"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/expend_tv_spending_amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:paddingBottom="15dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="15dp"
-            android:text="0.0"
-            android:textColor="@color/colorRed"
-            android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/expend_tv_spending_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:paddingBottom="15dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:text="0.0"
+        android:textColor="@color/colorRed"
+        android:textSize="30sp"/>
 
     <include layout="@layout/light_gray_item_divider"/>
+
     <RelativeLayout
         android:id="@+id/expend_rl_spending_category"
         android:layout_width="match_parent"
@@ -63,6 +64,7 @@
     </RelativeLayout>
 
     <include layout="@layout/light_gray_item_divider"/>
+
     <RelativeLayout
         android:id="@+id/expend_rl_spending_coin_category"
         android:layout_width="match_parent"
@@ -87,6 +89,7 @@
     </RelativeLayout>
 
     <include layout="@layout/light_gray_item_divider"/>
+
     <include layout="@layout/add_fragment_remark"/>
 
     <com.qq281982108.tallylight.view.WrapView
@@ -105,4 +108,15 @@
         <include layout="@layout/add_fragment_refund"/>
     </com.qq281982108.tallylight.view.WrapView>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="保存"/>
 </LinearLayout>

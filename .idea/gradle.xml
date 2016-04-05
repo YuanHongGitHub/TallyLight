@@ -11,6 +11,9 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/flyrefresh" />
+            <option value="$PROJECT_DIR$/litepal" />
+            <option value="$PROJECT_DIR$/sample" />
+            <option value="$PROJECT_DIR$/sqlitedemo" />
           </set>
         </option>
       </GradleProjectSettings>

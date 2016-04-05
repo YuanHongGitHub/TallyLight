@@ -140,7 +140,6 @@ public class TallyLightActivity extends BaseActivity implements View.OnClickList
             case R.id.tv_statement_page:
                 showPageFragment(STATEMENT_PAGE_INDEX);
                 break;
-
             case R.id.tv_add_page:
                 showPageFragment(ADD_PAGE_INDEX);
                 break;

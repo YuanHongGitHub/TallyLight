@@ -178,6 +178,9 @@ public class CalculatorUtil {
 
     public void confirm() {
         if (!result.toString().contains("-")) {
+            isHadDot = isAdded = isDivided = isMultiplied = isSubtracted = false;
+            numFirst.delete(0, numFirst.length());
+            result = 0.0;
 //            dismiss();
         }
     }
@@ -250,6 +253,14 @@ public class CalculatorUtil {
         isHadDot = false;
         dotIsFirst = false;
         dotIsFirstCleared = false;
+    }
+
+    public void plus_minus() {
+        if (result < 0) {
+            result = result * -1;
+            mListener.onCalculated(result.toString());
+        }
+
     }
 
     public interface CalculatorUtilListener {

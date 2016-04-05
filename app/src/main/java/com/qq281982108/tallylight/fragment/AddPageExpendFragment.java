@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qq281982108.tallylight.R;
 import com.qq281982108.tallylight.util.CalculatorUtil;
@@ -32,6 +33,8 @@ public class AddPageExpendFragment extends BaseFragment
         CalculatorUtil.CalculatorUtilListener {
     public int[] time = new int[5];
     boolean hasPause = false;
+    String dateStr = TimeUtils.getTime(TimeUtils.getCurrentTimeInLong());
+    String remarks = null;
     private TextView mMoneyTV, mSelectTimeTV, mSelectMemberTV, mSelectCategoryTV;
     private CalculatorPopupWindow mCalculatorPopupWindow;
     private String textMember = "自己", textCategory = "早餐", textMoney = "0.0";
@@ -45,7 +48,7 @@ public class AddPageExpendFragment extends BaseFragment
         mMoneyTV = (TextView) view.findViewById(R.id.expend_tv_spending_amount);
 
         mSelectTimeTV = (TextView) view.findViewById(R.id.tv_add_fragment_time_time);
-        mSelectTimeTV.setText(TimeUtils.getTime(TimeUtils.getCurrentTimeInLong()));
+        mSelectTimeTV.setText(dateStr);
         mSelectMemberTV = (TextView) view.findViewById(R.id.tv_add_fragment_member);
         mSelectCategoryTV = (TextView) view.findViewById(R.id.expend_tv_spending_category);
 
@@ -53,6 +56,9 @@ public class AddPageExpendFragment extends BaseFragment
         view.findViewById(R.id.ll_add_fragment_time).setOnClickListener(this);
         view.findViewById(R.id.ll_add_fragment_member).setOnClickListener(this);
         view.findViewById(R.id.expend_rl_spending_category).setOnClickListener(this);
+
+
+        view.findViewById(R.id.submit).setOnClickListener(this);
 
         SharedPreferences getData = getContext().getSharedPreferences("getData", Context.MODE_PRIVATE);
         if (getData != null && hasPause) {
@@ -92,7 +98,6 @@ public class AddPageExpendFragment extends BaseFragment
         popHeight = (int) (outMetrics.heightPixels * 0.5);
     }
 
-
     @Override
     public void onPause() {
         super.onPause();
@@ -110,6 +115,7 @@ public class AddPageExpendFragment extends BaseFragment
         editor.apply();
         Log.e("yh", "onPause");
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -137,11 +143,17 @@ public class AddPageExpendFragment extends BaseFragment
                 categoryChoiceDialogFragment.setOnCategorySelectedListener(this);
                 categoryChoiceDialogFragment.show(getActivity().getFragmentManager(), "category");
                 break;
+            case R.id.submit:
+                if (textMoney.equals("0.0")) {
+                    Toast.makeText(getContext(), "输入不能为空", Toast.LENGTH_SHORT).show();    //弹出一个自动消失的提示框
+                    return;
+                }
+                //TODO  编辑数据
+
             default:
                 break;
         }
     }
-
 
     @Override
     public void onSelect(String tag, int[] ints) {
@@ -151,6 +163,7 @@ public class AddPageExpendFragment extends BaseFragment
         String hour = time[3] > 9 ? " " + time[3] : "0" + time[3];
         String minute = time[4] > 9 ? ":" + time[4] : ":0" + time[4];
         mSelectTimeTV.setText(time[0] + month + day + " " + hour + minute);
+        dateStr = time[0] + month + day + " " + hour + minute;
     }
 
     @Override
