@@ -1,6 +1,7 @@
 package com.qq281982108.tallylight.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -14,9 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qq281982108.tallylight.R;
+import com.qq281982108.tallylight.model.Expend;
 import com.qq281982108.tallylight.util.CalculatorUtil;
 import com.qq281982108.tallylight.util.TimeUtils;
 import com.qq281982108.tallylight.view.CalculatorPopupWindow;
+
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
 
 /**
  * 项目名称：TallyLight
@@ -149,7 +155,34 @@ public class AddPageExpendFragment extends BaseFragment
                     return;
                 }
                 //TODO  编辑数据
+                Expend expend = new Expend();
+                expend.setMoney(textMoney);
+                expend.setExpendCategory(textCategory);
+                expend.setMoneyCategory("现金");
+                expend.setRemark(null);
+                expend.setTime(dateStr);
+                expend.setUser(textMember);
+                expend.setMerchant(null);
+                expend.setRefund(false);
+                expend.save();
+                Log.e("yh", "textMoney" + textMoney + "textCategory" + textCategory + "dateStr" + dateStr + "textMember" + textMember);
+                if (expend.save()) {
+                    Intent intent = new Intent().setAction("android.basic.notify");
+                    getActivity().sendBroadcast(intent);
+                    List<Expend> allExpend = DataSupport.findAll(Expend.class);
+                    for (Expend expend1 : allExpend) {
 
+                        Log.e("yh", "allExpend:" + "getMoney" + expend1.getMoney()
+                                + "getExpendCategory" + expend1.getExpendCategory()
+                                + "getTime" + expend1.getTime()
+                                + "getUser" + expend1.getUser());
+                    }
+                    Toast.makeText(getContext(), "存储成功", Toast.LENGTH_SHORT).show();
+                    textMoney = "0.0";
+                    mMoneyTV.setText(textMoney);
+                } else {
+                    Toast.makeText(getContext(), "存储失败", Toast.LENGTH_SHORT).show();
+                }
             default:
                 break;
         }
@@ -191,4 +224,7 @@ public class AddPageExpendFragment extends BaseFragment
         textMoney = result;
         Log.e("yh", "mMoneyTV" + result);
     }
+
 }
+
+

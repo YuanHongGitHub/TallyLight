@@ -3,6 +3,7 @@ package com.qq281982108.tallylight.util;
 import android.text.format.Time;
 import android.util.Log;
 
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -99,5 +100,12 @@ public class TimeUtils {
      */
     public static String getCurrentTimeInString(SimpleDateFormat dateFormat) {
         return getTime(getCurrentTimeInLong(), dateFormat);
+    }
+
+    public static Date stringToDate(String dateString) {
+        ParsePosition position = new ParsePosition(0);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date dateValue = simpleDateFormat.parse(dateString, position);
+        return dateValue;
     }
 }

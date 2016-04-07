@@ -1,18 +1,23 @@
 package com.qq281982108.tallylight.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.qq281982108.tallylight.R;
+import com.qq281982108.tallylight.adapter.CommonAdapter;
+import com.qq281982108.tallylight.model.Expend;
+import com.qq281982108.tallylight.util.ViewHolder;
 
-import java.util.ArrayList;
+import org.litepal.crud.DataSupport;
+
 import java.util.List;
 
 /**
@@ -23,128 +28,85 @@ import java.util.List;
  * 修改备注：
  */
 public class RecordPageDetailFragment extends BaseFragment {
-    private List<String> GroupData;//定义组数据
-    private List<List<String>> ChildrenData;//定义组中的子数据
+    private ListView mListView;
+    private List<Expend> allExpend = DataSupport.order("time desc").find(Expend.class);
+    private CommonAdapter mAdapter;
+    private Receiver mReceiver = new Receiver();
+    private IntentFilter mTimeFilter = new IntentFilter("android.basic.notify");
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_record_page_detail, container, false);
-        LoadListDate();
-        initView(view);
+        mListView = (ListView) view.findViewById(R.id.main_listView);
+//        Collections.sort(allExpend, new Comparator<Expend>() {
+//            @Override
+//            public int compare(Expend lhs, Expend rhs) {
+//                Date date1 = TimeUtils.stringToDate(lhs.getTime());
+//                Date date2 = TimeUtils.stringToDate(rhs.getTime());
+//                if (date1.before(date2)){
+//                    return 1;
+//                }
+//                return -1;
+//            }
+//        });
+        if (mAdapter == null) {
+            mAdapter = new CommonAdapter<Expend>(
+                    getContext(), allExpend, R.layout.main_item) {
+                @Override
+                public void convert(ViewHolder helper, Expend item) {
+                    helper.setText(R.id.id_tv_title, item.getTime() + item.getUser() + item.getExpendCategory() + item.getMoney());
+                }
+            };
+        }
+        //设置适配器
+        mListView.setAdapter(mAdapter);
+
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                ListView listView = (ListView) parent;
+                final Expend expend = (Expend) listView.getItemAtPosition(position);
+                final int expendId = expend.getId();
+                ItemLongClickDialogFragment itemLongClickDialogFragment = ItemLongClickDialogFragment.newInstance(expendId);
+                itemLongClickDialogFragment.setOnDetailItemDeleteClickListener(new ItemLongClickDialogFragment.OnDetailItemDeleteClickListener() {
+                    @Override
+                    public void delete() {
+                        allExpend.remove(expend);
+                        DataSupport.delete(Expend.class, expendId);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+                itemLongClickDialogFragment.show(getActivity().getFragmentManager(), "item");
+                return true;
+            }
+        });
+
         return view;
     }
 
-    private void LoadListDate() {
-        GroupData = new ArrayList<String>();
-        GroupData.add("国家");
-        GroupData.add("人物");
-        GroupData.add("武器");
-
-        ChildrenData = new ArrayList<List<String>>();
-        List<String> Child1 = new ArrayList<String>();
-        Child1.add("蜀国");
-        Child1.add("魏国");
-        Child1.add("吴国");
-        ChildrenData.add(Child1);
-        List<String> Child2 = new ArrayList<String>();
-        Child2.add("关羽");
-        Child2.add("张飞");
-        Child2.add("典韦");
-        Child2.add("吕布");
-        Child2.add("曹操");
-        Child2.add("甘宁");
-        Child2.add("郭嘉");
-        Child2.add("周瑜");
-        ChildrenData.add(Child2);
-        List<String> Child3 = new ArrayList<String>();
-        Child3.add("青龙偃月刀");
-        Child3.add("丈八蛇矛枪");
-        Child3.add("青钢剑");
-        Child3.add("麒麟弓");
-        Child3.add("银月枪");
-        ChildrenData.add(Child3);
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(mReceiver, mTimeFilter);
     }
 
-    private void initView(View view) {
-        ExpandableListView myExpandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
-        myExpandableListView.setAdapter(new ExpandableAdapter());
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().unregisterReceiver(mReceiver);
     }
 
-    private class ExpandableAdapter extends BaseExpandableListAdapter {
+    private class Receiver extends BroadcastReceiver {
         @Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return ChildrenData.get(groupPosition).get(childPosition);
-        }
-
-        @Override
-        public long getChildId(int groupPosition, int childPosition) {
-            return 0;
-        }
-
-        @Override
-        public View getChildView(int groupPosition, int childPosition,
-                                 boolean isLastChild, View convertView, ViewGroup parent) {
-            TextView myText = null;
-            if (convertView != null) {
-                myText = (TextView) convertView;
-                myText.setText(ChildrenData.get(groupPosition).get(childPosition));
-            } else {
-                myText = createView(ChildrenData.get(groupPosition).get(childPosition));
+        public void onReceive(Context context, Intent intent) {
+            switch (intent.getAction()) {
+                case "android.basic.notify":
+                    Expend expend = DataSupport.findLast(Expend.class);
+                    allExpend.add(expend);
+                    mAdapter.notifyDataSetChanged();
+                    break;
+                default:
+                    break;
             }
-            return myText;
-        }
-
-        private TextView createView(String content) {
-            AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(
-                    ViewGroup.LayoutParams.FILL_PARENT, 80);
-            TextView myText = new TextView(getActivity());
-            myText.setLayoutParams(layoutParams);
-            myText.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-            myText.setPadding(80, 0, 0, 0);
-            myText.setText(content);
-            return myText;
-        }
-
-        @Override
-        public int getChildrenCount(int groupPosition) {
-            return ChildrenData.get(groupPosition).size();
-        }
-
-        @Override
-        public Object getGroup(int groupPosition) {
-            return GroupData.get(groupPosition);
-        }
-
-        @Override
-        public int getGroupCount() {
-            return GroupData.size();
-        }
-
-        @Override
-        public long getGroupId(int groupPosition) {
-            return 0;
-        }
-
-        @Override
-        public View getGroupView(int groupPosition, boolean isExpanded,
-                                 View convertView, ViewGroup parent) {
-            TextView myText = null;
-            if (convertView != null) {
-                myText = (TextView) convertView;
-                myText.setText(GroupData.get(groupPosition));
-            } else {
-                myText = createView(GroupData.get(groupPosition));
-            }
-            return myText;
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return false;
-        }
-
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return false;
         }
     }
 }

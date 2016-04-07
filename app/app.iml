@@ -93,5 +93,6 @@
     <orderEntry type="library" exported="" name="BmobSDK_V3.4.5_1111" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-animators-1.2.2" level="project" />
     <orderEntry type="module" module-name="flyrefresh" exported="" />
+    <orderEntry type="module" module-name="litepal" exported="" />
   </component>
 </module>

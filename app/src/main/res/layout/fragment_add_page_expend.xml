@@ -90,7 +90,14 @@
 
     <include layout="@layout/light_gray_item_divider"/>
 
-    <include layout="@layout/add_fragment_remark"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:drawableBottom="@drawable/blue_line"
+
+        android:hint="备注......"
+        android:padding="10dp"/>
 
     <com.qq281982108.tallylight.view.WrapView
         android:layout_width="wrap_content"

@@ -30,7 +30,7 @@ public class TallyLightActivity extends BaseActivity implements View.OnClickList
     private FragmentManager fm;
     private BaseFragment[] listFragments;
     private String[] tabArray = {"detail", "statement", "add", "wallet", "mine"};
-    private int index = 0;
+    private int index = 2;
     private TextView tv_detailPage, tv_statementPage, tv_addPage, walletPage, minePage;
 
     @Override
@@ -70,12 +70,12 @@ public class TallyLightActivity extends BaseActivity implements View.OnClickList
         // 如果没有添加，则通过FragmentTransaction向activity提交一个添加HomePageFragment的事务
         // 如果已经添加过，则通过FragmentTransaction向activity提交隐藏之前fragment并显示HomePageFragment的请求
         // 从这里可以看出，FragmentTransaction可以提交一套事务让activity处理
-        if (!listFragments[0].isAdded()) {
-            ft.add(R.id.container_layout, listFragments[0]).commit();
+        if (!listFragments[2].isAdded()) {
+            ft.add(R.id.container_layout, listFragments[2]).commit();
         } else {
-            ft.hide(listFragments[index]).show(listFragments[0]).commit();
+            ft.hide(listFragments[index]).show(listFragments[2]).commit();
         }
-        setPageStyle(DETAIL_PAGE_INDEX);
+        setPageStyle(ADD_PAGE_INDEX);
 
     }
 

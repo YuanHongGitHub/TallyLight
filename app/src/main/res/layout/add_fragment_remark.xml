@@ -14,16 +14,4 @@
         android:layout_marginRight="10dp"
         android:layout_weight="1"/>
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginRight="10dp"
-        android:padding="3dp"
-        android:src="@drawable/fenxiang"/>
-
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:padding="3dp"
-        android:src="@drawable/fenxiang"/>
 </LinearLayout>

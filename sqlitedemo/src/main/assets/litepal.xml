@@ -5,7 +5,6 @@
     <version value="3"></version>
 
     <list>
-        <mapping class="com.qq281982108.sqlitedemo.News"></mapping>
-        <mapping class="com.qq281982108.sqlitedemo.Comment"></mapping>
+        <mapping class="com.qq281982108.sqlitedemo.Expend"></mapping>
     </list>
 </litepal>
