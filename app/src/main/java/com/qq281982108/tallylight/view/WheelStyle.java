@@ -37,7 +37,7 @@ public class WheelStyle {
      */
     public static int STYLE_DAY = 5;
     /**
-     * Wheel Style Light Time
+     * Wheel Style Light YearAndMonth
      */
     public static int STYLE_LIGHT_TIME = 7;
 

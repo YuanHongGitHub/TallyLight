@@ -22,6 +22,16 @@ public class Expend extends DataSupport {
     private String merchant;
     private boolean refund;
 
+    private YearAndMonth mYearAndMonth;
+
+    public YearAndMonth getYearAndMonth() {
+        return mYearAndMonth;
+    }
+
+    public void setYearAndMonth(YearAndMonth yearAndMonth) {
+        mYearAndMonth = yearAndMonth;
+    }
+
     public boolean isRefund() {
         return refund;
     }

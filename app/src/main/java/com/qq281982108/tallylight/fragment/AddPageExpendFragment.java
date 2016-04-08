@@ -20,10 +20,6 @@ import com.qq281982108.tallylight.util.CalculatorUtil;
 import com.qq281982108.tallylight.util.TimeUtils;
 import com.qq281982108.tallylight.view.CalculatorPopupWindow;
 
-import org.litepal.crud.DataSupport;
-
-import java.util.List;
-
 /**
  * 项目名称：TallyLight
  * 创建人：yh
@@ -169,14 +165,6 @@ public class AddPageExpendFragment extends BaseFragment
                 if (expend.save()) {
                     Intent intent = new Intent().setAction("android.basic.notify");
                     getActivity().sendBroadcast(intent);
-                    List<Expend> allExpend = DataSupport.findAll(Expend.class);
-                    for (Expend expend1 : allExpend) {
-
-                        Log.e("yh", "allExpend:" + "getMoney" + expend1.getMoney()
-                                + "getExpendCategory" + expend1.getExpendCategory()
-                                + "getTime" + expend1.getTime()
-                                + "getUser" + expend1.getUser());
-                    }
                     Toast.makeText(getContext(), "存储成功", Toast.LENGTH_SHORT).show();
                     textMoney = "0.0";
                     mMoneyTV.setText(textMoney);

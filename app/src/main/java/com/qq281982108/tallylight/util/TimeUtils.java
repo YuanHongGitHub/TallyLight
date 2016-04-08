@@ -24,32 +24,32 @@ public class TimeUtils {
     }
 
     public static int getYear() {
-        Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
+        Time t = new Time(); // or YearAndMonth t=new YearAndMonth("GMT+8"); 加上Time Zone资料。
         t.setToNow(); // 取得系统时间。
         return t.year;
     }
 
     public static int getMonth() {
-        Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
+        Time t = new Time(); // or YearAndMonth t=new YearAndMonth("GMT+8"); 加上Time Zone资料。
         t.setToNow(); // 取得系统时间。
         Log.e("yh", "t:" + (t.month + 1));
         return t.month + 1;
     }
 
     public static int getMonthDay() {
-        Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
+        Time t = new Time(); // or YearAndMonth t=new YearAndMonth("GMT+8"); 加上Time Zone资料。
         t.setToNow(); // 取得系统时间。
         return t.monthDay;
     }
 
     public static int getHour() {
-        Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
+        Time t = new Time(); // or YearAndMonth t=new YearAndMonth("GMT+8"); 加上Time Zone资料。
         t.setToNow(); // 取得系统时间。
         return t.hour;
     }
 
     public static int getMinute() {
-        Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
+        Time t = new Time(); // or YearAndMonth t=new YearAndMonth("GMT+8"); 加上Time Zone资料。
         t.setToNow(); // 取得系统时间。
         return t.minute;
     }

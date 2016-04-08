@@ -39,7 +39,7 @@ public class TopBarRelativeLayout extends RelativeLayout implements View.OnClick
         mRelativeLayout = (RelativeLayout) findViewById(R.id.rl_calendar);
         mImageView.setOnClickListener(this);
         mRelativeLayout.setOnClickListener(this);
-        Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
+        Time t = new Time(); // or YearAndMonth t=new YearAndMonth("GMT+8"); 加上Time Zone资料。
         t.setToNow(); // 取得系统时间。
         mTextView.setText("" + t.monthDay);
     }
