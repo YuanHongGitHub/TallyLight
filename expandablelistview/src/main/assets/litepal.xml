@@ -32,9 +32,9 @@
     	</list>
     -->
     <list>
-        <mapping
-            class="com.qq281982108.pinnedheaderexpandablelistview.model.RecorderTime"></mapping>
-    </list>
+		<mapping
+			class="com.qq281982108.pinnedheaderexpandablelistview.model.Spending"/>
+	</list>
 
     <!--
     	Define the cases of the tables and columns name. Java is a

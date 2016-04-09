@@ -1,1 +1,1 @@
-include ':app', ':flyrefresh', ':litepal', ':sample', ':pinnedheaderexpandablelistview'
+include ':app', ':flyrefresh', ':litepal', ':sample', ':expandablelistview'
