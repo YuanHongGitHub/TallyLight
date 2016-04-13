@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.qq281982108.tallylight.R;
-import com.qq281982108.tallylight.adapter.MyExpandableListAdapter;
+import com.qq281982108.tallylight.adapter.MyExpandableListAdapter00;
 import com.qq281982108.tallylight.db.DbOperations;
 import com.qq281982108.tallylight.model.Spending;
 import com.qq281982108.tallylight.renyugang.PinnedHeaderExpandableListView;
@@ -36,7 +36,7 @@ public class RecordPageDetailFragment extends BaseFragment {
     private PinnedHeaderExpandableListView expandableListView;
     private List<String> groupList;
     private List<List<Spending>> childList;
-    private MyExpandableListAdapter adapter;
+    private MyExpandableListAdapter00 adapter;
     private Receiver mReceiver = new Receiver();
     private IntentFilter mTimeFilter = new IntentFilter("android.basic.notify");
     private ProgressBar mDialog;
@@ -104,7 +104,7 @@ public class RecordPageDetailFragment extends BaseFragment {
         protected void onPostExecute(Void result) {
             // 进行数据加载完成后的UI操作
             mDialog.setVisibility(View.INVISIBLE);
-            adapter = new MyExpandableListAdapter(getContext(), groupList, childList);
+            adapter = new MyExpandableListAdapter00(getContext(), groupList, childList);
             expandableListView.setAdapter(adapter);
             expandableListView.setVisibility(View.VISIBLE);
             if (groupList.size() == 0) {

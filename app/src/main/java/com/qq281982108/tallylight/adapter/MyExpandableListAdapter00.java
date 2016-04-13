@@ -1,13 +1,13 @@
 package com.qq281982108.tallylight.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.qq281982108.tallylight.R;
 import com.qq281982108.tallylight.model.Spending;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -24,15 +26,17 @@ import java.util.List;
  * 类名：MyExpandableListAdapter
  * 修改备注：
  */
-public class MyExpandableListAdapter extends BaseExpandableListAdapter {
+public class MyExpandableListAdapter00 extends BaseExpandableListAdapter {
     protected final int groupLayoutId = R.layout.group;
-    protected final int childLayoutId = R.layout.child;
+    protected final int childLayoutId = R.layout.child00;
     protected LayoutInflater inflater;
     protected Context context;
     protected List<String> groupList;
     protected List<List<Spending>> childList;
 
-    public MyExpandableListAdapter(Context context, List<String> groupList, List<List<Spending>> childList) {
+    private List<String> dayList;
+
+    public MyExpandableListAdapter00(Context context, List<String> groupList, List<List<Spending>> childList) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.groupList = groupList;
@@ -42,12 +46,14 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     // 返回父列表个数
     @Override
     public int getGroupCount() {
+        Log.e("yh", "groupList.size()" + groupList.size());
         return groupList.size();
     }
 
     // 返回子列表个数
     @Override
     public int getChildrenCount(int groupPosition) {
+        Log.e("yh", "childList.get(groupPosition).size()" + childList.get(groupPosition).size());
         return childList.get(groupPosition).size();
     }
 
@@ -83,7 +89,6 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         } else {
             groupHolder = (GroupHolder) convertView.getTag();
         }
-
         groupHolder.textView.setText(((String) getGroup(groupPosition)));
         if (isExpanded) {
             groupHolder.monthSummary.setVisibility(View.VISIBLE);
@@ -114,27 +119,37 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             childHolder = new ChildHolder();
             convertView = inflater.inflate(childLayoutId, null);
-            childHolder.childListView = (ListView) convertView.findViewById(R.id.child_listview);
+
             childHolder.daySummary = (LinearLayout) convertView.findViewById(R.id.day_summary);
-//            childHolder.day = (TextView) convertView.findViewById(R.id.day);
-//            childHolder.category = (TextView) convertView.findViewById(R.id.category);
-//            childHolder.dayTime = (TextView) convertView.findViewById(R.id.day_time);
-//            childHolder.money = (TextView) convertView.findViewById(R.id.money);
+            childHolder.day = (TextView) convertView.findViewById(R.id.day);
+            childHolder.category = (TextView) convertView.findViewById(R.id.category);
+            childHolder.dayTime = (TextView) convertView.findViewById(R.id.day_time);
+            childHolder.money = (TextView) convertView.findViewById(R.id.money);
             convertView.setTag(childHolder);
         } else {
             childHolder = (ChildHolder) convertView.getTag();
         }
 
-//        childHolder.day.setText(((Spending) getChild(groupPosition,
-//                childPosition)).getRecorderTime().substring(8, 10));
-//        childHolder.category.setText(((Spending) getChild(groupPosition,
-//                childPosition)).getSpendingCategory());
-//        childHolder.dayTime.setText(((Spending) getChild(groupPosition,
-//                childPosition)).getRecorderTime().substring(11));
-//        childHolder.money.setText(((Spending) getChild(groupPosition,
-//                childPosition)).getMoney());
 
-        childHolder.childListView.setAdapter(new ListViewAdapter(context, childList.get(groupPosition), childPosition));
+        dayList = new ArrayList<String>();
+        List<String> yearMonthList0 = new ArrayList<String>();
+//        for (Spending aYearMonthList : get) {
+//            yearMonthList0.add(aYearMonthList.getRecorderYearMonth());
+//        }
+        HashSet<String> hashSet = new HashSet<String>(yearMonthList0);
+        dayList.addAll(hashSet);
+
+
+        childHolder.day.setText(((Spending) getChild(groupPosition,
+                childPosition)).getRecorderTime().substring(8, 10));
+        childHolder.category.setText(((Spending) getChild(groupPosition,
+                childPosition)).getSpendingCategory());
+        childHolder.dayTime.setText(((Spending) getChild(groupPosition,
+                childPosition)).getRecorderTime().substring(11));
+        childHolder.money.setText(((Spending) getChild(groupPosition,
+                childPosition)).getMoney());
+
+
         return convertView;
     }
 
@@ -155,11 +170,10 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     class ChildHolder {
-        ListView childListView;
         LinearLayout daySummary;
-//        TextView day;
-//        TextView category;
-//        TextView dayTime;
-//        TextView money;
+        TextView day;
+        TextView category;
+        TextView dayTime;
+        TextView money;
     }
 }
