@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qq281982108.tallylight.R;
-import com.qq281982108.tallylight.model.Expend;
+import com.qq281982108.tallylight.model.Spending;
 import com.qq281982108.tallylight.util.CalculatorUtil;
 import com.qq281982108.tallylight.util.TimeUtils;
 import com.qq281982108.tallylight.view.CalculatorPopupWindow;
@@ -151,14 +151,15 @@ public class AddPageExpendFragment extends BaseFragment
                     return;
                 }
                 //TODO  编辑数据
-                Expend expend = new Expend();
+                Spending expend = new Spending();
                 expend.setMoney(textMoney);
-                expend.setExpendCategory(textCategory);
-                expend.setMoneyCategory("现金");
-                expend.setRemark(null);
-                expend.setTime(dateStr);
+                expend.setSpendingCategory(textCategory);
+                expend.setAccount("现金");
+                expend.setSpendingRemark(null);
+                expend.setRecorderTime(dateStr);
+                expend.setRecorderYearMonth(dateStr.substring(0, 7));
                 expend.setUser(textMember);
-                expend.setMerchant(null);
+                expend.setSeller(null);
                 expend.setRefund(false);
                 expend.save();
                 Log.e("yh", "textMoney" + textMoney + "textCategory" + textCategory + "dateStr" + dateStr + "textMember" + textMember);
@@ -181,10 +182,10 @@ public class AddPageExpendFragment extends BaseFragment
         time = ints;
         String month = time[1] > 9 ? "-" + time[1] : "-0" + time[1];
         String day = time[2] > 9 ? "-" + time[2] : "-0" + time[2];
-        String hour = time[3] > 9 ? " " + time[3] : "0" + time[3];
+        String hour = time[3] > 9 ? " " + time[3] : " 0" + time[3];
         String minute = time[4] > 9 ? ":" + time[4] : ":0" + time[4];
         mSelectTimeTV.setText(time[0] + month + day + " " + hour + minute);
-        dateStr = time[0] + month + day + " " + hour + minute;
+        dateStr = time[0] + month + day /*+ " "*/ + hour + minute;
     }
 
     @Override

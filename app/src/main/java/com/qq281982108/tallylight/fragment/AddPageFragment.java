@@ -27,6 +27,7 @@ import java.util.List;
 public class AddPageFragment extends BaseFragment {
     AddPageExpendFragment mAddPageExpendFragment = new AddPageExpendFragment();
     RecordPageFlowDirectionFragment mLiuxiangFragment = new RecordPageFlowDirectionFragment();
+    RecordPageFlowDirectionFragment mLiuxiangFragment1 = new RecordPageFlowDirectionFragment();
     RecordPageGatherFragment mHuizongFragment = new RecordPageGatherFragment();
     private List<Fragment> mTabContents = new ArrayList<>();
     private FragmentPagerAdapter mAdapter;
@@ -57,7 +58,7 @@ public class AddPageFragment extends BaseFragment {
     private void initDatas() {
         mTabContents.add(mAddPageExpendFragment);
         mTabContents.add(mLiuxiangFragment);
-        mTabContents.add(mLiuxiangFragment);
+        mTabContents.add(mLiuxiangFragment1);
         mTabContents.add(mHuizongFragment);
 
         mAdapter = new FragmentPagerAdapter(getActivity().getSupportFragmentManager()) {

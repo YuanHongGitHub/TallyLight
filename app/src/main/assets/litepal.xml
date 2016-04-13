@@ -32,7 +32,7 @@
     	</list>
     -->
     <list>
-        <mapping class="com.qq281982108.tallylight.model.Expend"></mapping>
+        <mapping class="com.qq281982108.tallylight.model.Spending"></mapping>
     </list>
 
     <!--

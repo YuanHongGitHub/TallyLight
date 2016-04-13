@@ -4,12 +4,6 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <!--    <ListView
-            android:id="@+id/main_listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ListView>-->
     <com.qq281982108.tallylight.renyugang.PinnedHeaderExpandableListView
         android:id="@+id/expandablelist"
         android:layout_width="match_parent"

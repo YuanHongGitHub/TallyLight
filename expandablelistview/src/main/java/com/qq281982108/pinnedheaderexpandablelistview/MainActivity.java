@@ -23,9 +23,10 @@ import com.qq281982108.pinnedheaderexpandablelistview.view.StickyLayout;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends Activity implements
         ExpandableListView.OnChildClickListener,
@@ -37,8 +38,8 @@ public class MainActivity extends Activity implements
     private EditText jine, zhichuleibie, zhanghu, beizhu, shijian, yonghu, shangjia;
     private CheckBox baoxiao;
 
-    private ArrayList<Spending> groupList;
-    private ArrayList<List<Spending>> childList;
+    private ArrayList<String> groupList;
+    private ArrayList<List<String>> childList;
 
     private MyexpandableListAdapter adapter;
 
@@ -73,41 +74,77 @@ public class MainActivity extends Activity implements
      * InitData
      */
     void initData() {
-        groupList = new ArrayList<Spending>();
-        List<Spending> spendingYearMonth = DataSupport.select("recorderYearMonth").find(Spending.class);
-        if (spendingYearMonth.size() == 0) {
-            expandableListView.setVisibility(View.INVISIBLE);
-//            expandableListView.setOnHeaderUpdateListener(this);
-//            expandableListView.setOnChildClickListener(this);
-//            expandableListView.setOnGroupClickListener(this);
-        } else {
-            expandableListView.setVisibility(View.VISIBLE);
-//            expandableListView.expandGroup(0);
+        groupList = new ArrayList<String>();
+        List<Spending> yearMonthList = DataSupport.select("recorderYearMonth").find(Spending.class);
+        List<String> yearMonthList0 = new ArrayList<String>();
+        for (Spending aYearMonthList : yearMonthList) {
+            yearMonthList0.add(aYearMonthList.getRecorderYearMonth());
         }
-        Spending dataItem;
-        Map<String, List<Spending>> resultMap = new HashMap<String, List<Spending>>();
-        if (spendingYearMonth.size() != 0) {
-            for (int i = 0; i < spendingYearMonth.size(); i++) {
-                dataItem = spendingYearMonth.get(i);
-                if (resultMap.containsKey(dataItem.getRecorderYearMonth())) {
-                    resultMap.get(dataItem.getRecorderYearMonth()).add(dataItem);
-                } else {
-                    List<Spending> list = new ArrayList<Spending>();
-                    list.add(dataItem);
-                    resultMap.put(dataItem.getRecorderYearMonth(), list);
+        HashSet<String> hashSet = new HashSet<String>(yearMonthList0);
+        groupList.addAll(hashSet);
+        Collections.sort(groupList, new Comparator<String>() {
+            @Override
+            public int compare(String lhs, String rhs) {
+                return lhs.compareTo(rhs);
+            }
+        });
+        childList = new ArrayList<List<String>>();
+        for (int i = 0; i < groupList.size(); i++) {
+            List<Spending> spendingI = DataSupport.where("recorderYearMonth = ?", groupList.get(i)).find(Spending.class);
+            Log.e("yh", "spendingsize" + spendingI.size());
+            ArrayList<String> childTemp;
+            if (i == 0) {
+                childTemp = new ArrayList<String>();
+                for (int j = 0; j < 13; j++) {
+                    String people = null;
+                    people = "money-" + j;
+                    childTemp.add(people);
+                }
+            } else if (i == 1) {
+                childTemp = new ArrayList<String>();
+                for (int j = 0; j < 8; j++) {
+                    String people = null;
+                    people = ("money---" + j);
+                    childTemp.add(people);
+                }
+            } else {
+                childTemp = new ArrayList<String>();
+                for (int j = 0; j < 23; j++) {
+                    String people = null;
+                    people = ("money-------" + j);
+                    childTemp.add(people);
                 }
             }
-            Log.e("yh", " resultMap.size(): " + resultMap.size());
-
-            SortLis<Spending> yearMonthSortLis = new SortLis<Spending>();
-            yearMonthSortLis.Sort(spendingYearMonth, "getRecorderTime", "desc");
-            for (Spending spending : spendingYearMonth) {
-                Log.e("yh", "getRecorderYearMonth: " + spending.getRecorderYearMonth());
-                groupList.add(spending);
-            }
+            childList.add(childTemp);
         }
+//        if (spendingYearMonth.size() == 0) {
+//            expandableListView.setVisibility(View.INVISIBLE);
+////            expandableListView.setOnHeaderUpdateListener(this);
+////            expandableListView.setOnChildClickListener(this);
+////            expandableListView.setOnGroupClickListener(this);
+//        } else {
+//            expandableListView.setVisibility(View.VISIBLE);
+////            expandableListView.expandGroup(0);
+//            Spending dataItem;
+//            Map<String, List<Spending>> resultMap = new HashMap<String, List<Spending>>();
+//            for (int i = 0; i < spendingYearMonth.size(); i++) {
+//                dataItem = spendingYearMonth.get(i);
+//                if (resultMap.containsKey(dataItem.getRecorderYearMonth())) {
+//                    resultMap.get(dataItem.getRecorderYearMonth()).add(dataItem);
+//                } else {
+//                    List<Spending> list = new ArrayList<Spending>();
+//                    list.add(dataItem);
+//                    resultMap.put(dataItem.getRecorderYearMonth(), list);
+//                }
+//            }
+//            Log.e("yh", " resultMap.size(): " + resultMap.size());
+//            for (Spending spending : spendingYearMonth) {
+//                Log.e("yh", "getRecorderYearMonth: " + spending.getRecorderYearMonth());
+//                groupList.add(spending);
+//            }
+//        }
 
-        childList = new ArrayList<List<Spending>>();
+//        childList = new ArrayList<List<Spending>>();
 
 //        groupList = new ArrayList<Spending>();
 //        Spending group = null;
@@ -116,41 +153,41 @@ public class MainActivity extends Activity implements
 //            groupList.add(group);
 //        }
 //        childList = new ArrayList<List<Spending>>();
-        for (int i = 0; i < groupList.size(); i++) {
-            ArrayList<Spending> childTemp;
-            if (i == 0) {
-                childTemp = new ArrayList<Spending>();
-                for (int j = 0; j < 13; j++) {
-                    Spending people = new Spending();
-                    people.setMoney("money-" + j);
-//                    people.setUser("user-" + j);
-//                    people.setMerchant("merchant-" + j);
-
-                    childTemp.add(people);
-                }
-            } else if (i == 1) {
-                childTemp = new ArrayList<Spending>();
-                for (int j = 0; j < 8; j++) {
-                    Spending people = new Spending();
-                    people.setMoney("money---" + j);
-//                    people.setUser("user---" + j);
-//                    people.setMerchant("merchant---" + j);
-
-                    childTemp.add(people);
-                }
-            } else {
-                childTemp = new ArrayList<Spending>();
-                for (int j = 0; j < 23; j++) {
-                    Spending people = new Spending();
-                    people.setMoney("money-------" + j);
-//                    people.setUser("user-------" + j);
-//                    people.setMerchant("merchant-------" + j);
-
-                    childTemp.add(people);
-                }
-            }
-            childList.add(childTemp);
-        }
+//        for (int i = 0; i < groupList.size(); i++) {
+//            ArrayList<Spending> childTemp;
+//            if (i == 0) {
+//                childTemp = new ArrayList<Spending>();
+//                for (int j = 0; j < 13; j++) {
+//                    Spending people = new Spending();
+//                    people.setMoney("money-" + j);
+////                    people.setUser("user-" + j);
+////                    people.setMerchant("merchant-" + j);
+//
+//                    childTemp.add(people);
+//                }
+//            } else if (i == 1) {
+//                childTemp = new ArrayList<Spending>();
+//                for (int j = 0; j < 8; j++) {
+//                    Spending people = new Spending();
+//                    people.setMoney("money---" + j);
+////                    people.setUser("user---" + j);
+////                    people.setMerchant("merchant---" + j);
+//
+//                    childTemp.add(people);
+//                }
+//            } else {
+//                childTemp = new ArrayList<Spending>();
+//                for (int j = 0; j < 23; j++) {
+//                    Spending people = new Spending();
+//                    people.setMoney("money-------" + j);
+////                    people.setUser("user-------" + j);
+////                    people.setMerchant("merchant-------" + j);
+//
+//                    childTemp.add(people);
+//                }
+//            }
+//            childList.add(childTemp);
+//        }
 
 
     }
@@ -219,9 +256,9 @@ public class MainActivity extends Activity implements
     @Override
     public void updatePinnedHeader(View headerView, int firstVisibleGroupPos) {
         if (adapter.getGroupCount() > 0) { // 防止列表在无数据的情况崩溃
-            Spending firstVisibleGroup = (Spending) adapter.getGroup(firstVisibleGroupPos);
+            String firstVisibleGroup = (String) adapter.getGroup(firstVisibleGroupPos);
             TextView textView = (TextView) headerView.findViewById(R.id.group);
-            textView.setText(firstVisibleGroup.getRecorderTime());
+            textView.setText(firstVisibleGroup);
         }
     }
 
@@ -296,8 +333,7 @@ public class MainActivity extends Activity implements
                 groupHolder = (GroupHolder) convertView.getTag();
             }
 
-            groupHolder.textView.setText(((Spending) getGroup(groupPosition))
-                    .getRecorderTime());
+            groupHolder.textView.setText(((String) getGroup(groupPosition)));
             if (isExpanded)// ture is Expanded or false is not isExpanded
                 groupHolder.imageView.setImageResource(R.drawable.expanded);
             else
@@ -330,12 +366,12 @@ public class MainActivity extends Activity implements
                 childHolder = (ChildHolder) convertView.getTag();
             }
 
-            childHolder.textShijian.setText(((Spending) getChild(groupPosition,
-                    childPosition)).getRecorderTime());
-            childHolder.textleibie.setText(String.valueOf(((Spending) getChild(
-                    groupPosition, childPosition)).getSpendingCategory()));
-            childHolder.textjine.setText(((Spending) getChild(groupPosition,
-                    childPosition)).getMoney());
+            childHolder.textShijian.setText(((String) getChild(groupPosition,
+                    childPosition)));
+//            childHolder.textleibie.setText(String.valueOf(((Spending) getChild(
+//                    groupPosition, childPosition)).getSpendingCategory()));
+//            childHolder.textjine.setText(((Spending) getChild(groupPosition,
+//                    childPosition)).getMoney());
 
             return convertView;
         }

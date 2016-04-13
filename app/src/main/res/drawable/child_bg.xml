@@ -7,8 +7,8 @@
                 android:height="1px"
                 android:angle="0"
                 android:centerColor="#CCCCCC"
-                android:endColor="#FFFFFF"
-                android:startColor="#FFFFFF"/>
+                android:endColor="#00ffffff"
+                android:startColor="#00ffffff"/>
         </shape>
     </item>
 
