@@ -1,6 +1,7 @@
 package com.qq281982108.tallylight.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +34,12 @@ public class ListViewAdapter extends BaseAdapter {
         mLayoutInflater = LayoutInflater.from(context);
         this.childListViewData = childListViewData;
         this.childPosition = childPosition;
+        Log.e("yh", "childPosition:"+childPosition);
     }
 
     @Override
     public int getCount() {
+        Log.e("yh", " childListViewData.size():"+childListViewData.size());
         return childListViewData.size();
 
     }
@@ -48,7 +51,8 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return childPosition;
+        Log.e("yh", "position:"+position);
+        return 0;
     }
 
     @Override
@@ -68,13 +72,13 @@ public class ListViewAdapter extends BaseAdapter {
         String day = null;
         mList = new ArrayList<>();
         for (int i = 0; i < childListViewData.size(); i++) {
-            day = (childListViewData.get(childPosition)).getRecorderTime().substring(8, 10);
+            day = (childListViewData.get(i)).getRecorderTime().substring(8, 10);
             mList.add(day);
         }
-        holder.day.setText((childListViewData.get(childPosition)).getRecorderTime().substring(8, 10));
-        holder.category.setText((childListViewData.get(childPosition)).getSpendingCategory());
-        holder.dayTime.setText((childListViewData.get(childPosition)).getRecorderTime().substring(11));
-        holder.money.setText((childListViewData.get(childPosition)).getMoney());
+        holder.day.setText((childListViewData.get(position)).getRecorderTime().substring(8, 10));
+        holder.category.setText((childListViewData.get(position)).getSpendingCategory());
+        holder.dayTime.setText((childListViewData.get(position)).getRecorderTime().substring(11));
+        holder.money.setText((childListViewData.get(position)).getMoney());
         return view;
     }
 

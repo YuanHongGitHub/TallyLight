@@ -5,9 +5,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#FF000000</color>
     <color name="colorBlue">#30b2e8</color>
-    <color name="colorLightBlue">#d3f0fc</color>
+    <color name="colorLightBlue">#b4e9ff</color>
+    <color name="colorLightBlue2">#dbf2fc</color>
+    <color name="colorLightBlue3">#e3f5fa</color>
     <color name="colorGray">#7E7E7E</color>
-    <color name="colorLightGray">#c6c5c5</color>
+    <color name="colorLightGray">#d4d3d3</color>
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="popup_bg">#8f000000</color>
     <color name="colorRed">#ff0000</color>

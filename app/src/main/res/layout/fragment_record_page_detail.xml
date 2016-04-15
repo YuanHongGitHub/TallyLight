@@ -9,12 +9,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:cacheColorHint="@null"
-        android:childDivider="@drawable/child_bg"
         android:childIndicatorLeft="0dp"
-        android:divider="@color/colorGray"
-        android:dividerHeight="1dp"
+        android:divider="@null"
         android:groupIndicator="@null"
         android:scrollbarAlwaysDrawHorizontalTrack="false"/>
+
+    <!--    <com.qq281982108.tallylight.renyugang.PinnedHeaderExpandableListView
+            android:id="@+id/expandablelist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@null"
+            android:childDivider="@drawable/child_bg"
+            android:childIndicatorLeft="0dp"
+            android:divider="@color/colorGray"
+            android:dividerHeight="1dp"
+            android:groupIndicator="@null"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"/>-->
 
     <ProgressBar
         android:id="@+id/progressBar"

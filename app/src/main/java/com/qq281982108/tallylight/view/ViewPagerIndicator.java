@@ -107,7 +107,7 @@ public class ViewPagerIndicator extends LinearLayout {
         // 初始化画笔
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setColor(getResources().getColor(R.color.colorWhite));
+        mPaint.setColor(getResources().getColor(R.color.colorLightBlue2));
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setPathEffect(new CornerPathEffect(3));
 

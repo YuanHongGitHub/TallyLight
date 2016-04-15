@@ -46,14 +46,14 @@ public class MyExpandableListAdapter00 extends BaseExpandableListAdapter {
     // 返回父列表个数
     @Override
     public int getGroupCount() {
-        Log.e("yh", "groupList.size()" + groupList.size());
+//        Log.e("yh", "groupList.size()" + groupList.size());
         return groupList.size();
     }
 
     // 返回子列表个数
     @Override
     public int getChildrenCount(int groupPosition) {
-        Log.e("yh", "childList.get(groupPosition).size()" + childList.get(groupPosition).size());
+//        Log.e("yh", "childList.get(groupPosition).size()" + childList.get(groupPosition).size());
         return childList.get(groupPosition).size();
     }
 
@@ -138,7 +138,21 @@ public class MyExpandableListAdapter00 extends BaseExpandableListAdapter {
 //        }
         HashSet<String> hashSet = new HashSet<String>(yearMonthList0);
         dayList.addAll(hashSet);
-
+        if (childPosition > 0) {
+            String dayPos = ((Spending) getChild(groupPosition,
+                    childPosition)).getRecorderTime().substring(8, 10);
+            String dayPos_ = ((Spending) getChild(groupPosition,
+                    childPosition - 1)).getRecorderTime().substring(8, 10);
+            Log.e("yh", "day:" + dayPos + "day-1:" + dayPos_);
+            Log.e("yh", "groupPosition:" + groupPosition + "childPosition:" + childPosition);
+            if (dayPos.equals(dayPos_)) {
+                childHolder.day.setVisibility(View.INVISIBLE);
+                childHolder.daySummary.setVisibility(View.GONE);
+            }
+        } else {
+            childHolder.day.setVisibility(View.VISIBLE);
+            childHolder.daySummary.setVisibility(View.VISIBLE);
+        }
 
         childHolder.day.setText(((Spending) getChild(groupPosition,
                 childPosition)).getRecorderTime().substring(8, 10));
@@ -148,8 +162,6 @@ public class MyExpandableListAdapter00 extends BaseExpandableListAdapter {
                 childPosition)).getRecorderTime().substring(11));
         childHolder.money.setText(((Spending) getChild(groupPosition,
                 childPosition)).getMoney());
-
-
         return convertView;
     }
 
