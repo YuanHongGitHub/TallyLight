@@ -39,7 +39,7 @@ public class MainActivity extends Activity implements
     private CheckBox baoxiao;
 
     private ArrayList<String> groupList;
-    private ArrayList<List<String>> childList;
+    private ArrayList<List<Spending>> childList;
 
     private MyexpandableListAdapter adapter;
 
@@ -88,33 +88,21 @@ public class MainActivity extends Activity implements
                 return lhs.compareTo(rhs);
             }
         });
-        childList = new ArrayList<List<String>>();
+        childList = new ArrayList<List<Spending>>();
         for (int i = 0; i < groupList.size(); i++) {
             List<Spending> spendingI = DataSupport.where("recorderYearMonth = ?", groupList.get(i)).find(Spending.class);
             Log.e("yh", "spendingsize" + spendingI.size());
-            ArrayList<String> childTemp;
-            if (i == 0) {
-                childTemp = new ArrayList<String>();
-                for (int j = 0; j < 13; j++) {
-                    String people = null;
-                    people = "money-" + j;
-                    childTemp.add(people);
-                }
-            } else if (i == 1) {
-                childTemp = new ArrayList<String>();
-                for (int j = 0; j < 8; j++) {
-                    String people = null;
-                    people = ("money---" + j);
-                    childTemp.add(people);
-                }
-            } else {
-                childTemp = new ArrayList<String>();
-                for (int j = 0; j < 23; j++) {
-                    String people = null;
-                    people = ("money-------" + j);
-                    childTemp.add(people);
-                }
+            ArrayList<Spending> childTemp = new ArrayList<Spending>();
+            for (int j = 0; j < spendingI.size(); j++) {
+                childTemp.add(spendingI.get(j));
+                Log.e("yh", "getRecorderTime" + j + "-->" + spendingI.get(j).getRecorderTime());
             }
+            Collections.sort(childTemp, new Comparator<Spending>() {
+                @Override
+                public int compare(Spending lhs, Spending rhs) {
+                    return rhs.getRecorderTime().compareTo(lhs.getRecorderTime());
+                }
+            });
             childList.add(childTemp);
         }
 //        if (spendingYearMonth.size() == 0) {
@@ -366,8 +354,23 @@ public class MainActivity extends Activity implements
                 childHolder = (ChildHolder) convertView.getTag();
             }
 
-            childHolder.textShijian.setText(((String) getChild(groupPosition,
-                    childPosition)));
+            if (childPosition > 0) {
+                String dayPos = ((Spending) getChild(groupPosition,
+                        childPosition)).getRecorderTime().substring(0, 8);
+                String dayPos_ = ((Spending) getChild(groupPosition,
+                        childPosition - 1)).getRecorderTime().substring(0, 8);
+                Log.e("yh", "day:" + dayPos + "day-1:" + dayPos_);
+//            Log.e("yh", "groupPosition:" + groupPosition + "childPosition:" + childPosition);
+                if (((Spending) getChild(groupPosition,
+                        childPosition)).getRecorderTime().substring(0, 8).equals(((Spending) getChild(groupPosition,
+                        childPosition - 1)).getRecorderTime().substring(0, 8))) {
+                    Log.e("yh", "groupPosition:" + groupPosition + "childPosition:" + childPosition);
+                    childHolder.textShijian.setText("与上一个相同");
+                }
+            } else {
+                childHolder.textShijian.setText(((Spending) getChild(groupPosition,
+                        childPosition)).getRecorderTime().substring(0, 8));
+            }
 //            childHolder.textleibie.setText(String.valueOf(((Spending) getChild(
 //                    groupPosition, childPosition)).getSpendingCategory()));
 //            childHolder.textjine.setText(((Spending) getChild(groupPosition,

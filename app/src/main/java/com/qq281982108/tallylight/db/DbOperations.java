@@ -2,6 +2,7 @@ package com.qq281982108.tallylight.db;
 
 import android.util.Log;
 
+import com.qq281982108.tallylight.model.Account;
 import com.qq281982108.tallylight.model.Spending;
 
 import org.litepal.crud.DataSupport;
@@ -22,6 +23,8 @@ import java.util.List;
 public class DbOperations {
     private List<String> groupList;
     private List<List<Spending>> childList;
+    private List<Account> mAccountList;
+    private List<String> categoryList;
 
     public List<String> initGroupList() {
         groupList = new ArrayList<String>();
@@ -60,5 +63,40 @@ public class DbOperations {
             childList.add(childTemp);
         }
         return childList;
+    }
+
+    public List<String> initAccountCategory() {
+        categoryList = new ArrayList<String>();
+        List<Account> accountCategoryList = DataSupport.select("accountCategory").find(Account.class);
+        List<String> accountCategoryList0 = new ArrayList<String>();
+        for (Account aYearMonthList : accountCategoryList) {
+            accountCategoryList0.add(aYearMonthList.getAccountCategory());
+        }
+        HashSet<String> hashSet = new HashSet<String>(accountCategoryList0);
+        categoryList.addAll(hashSet);
+        Collections.sort(categoryList, new Comparator<String>() {
+            @Override
+            public int compare(String lhs, String rhs) {
+                return rhs.compareTo(lhs);
+            }
+        });
+        return categoryList;
+    }
+
+    public List<Account> initAccountList(String accountCategory) {
+        mAccountList = new ArrayList<Account>();
+        List<Account> accounts = DataSupport.where("accountCategory = ?", accountCategory).find(Account.class);
+        if (accounts.size() == 0) {
+            Account account = new Account();
+            account.setAccountCategory("现金");
+            account.setAccountName("现金");
+            account.setMoney("0.00");
+            account.save();
+        }
+        for (int i = 0; i < accounts.size(); i++) {
+            mAccountList.add(accounts.get(i));
+        }
+
+        return mAccountList;
     }
 }

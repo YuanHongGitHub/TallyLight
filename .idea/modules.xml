@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/flyrefresh/flyrefresh.iml" filepath="$PROJECT_DIR$/flyrefresh/flyrefresh.iml" />
       <module fileurl="file://$PROJECT_DIR$/litepal/litepal.iml" filepath="$PROJECT_DIR$/litepal/litepal.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
     </modules>
   </component>
 </project>

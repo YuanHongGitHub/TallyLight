@@ -66,7 +66,7 @@
     <include layout="@layout/light_gray_item_divider"/>
 
     <RelativeLayout
-        android:id="@+id/expend_rl_spending_coin_category"
+        android:id="@+id/expend_rl_spending_account_category"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center_vertical">
@@ -94,8 +94,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:drawableBottom="@drawable/blue_line"
-
         android:hint="备注......"
         android:padding="10dp"/>
 

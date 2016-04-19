@@ -32,14 +32,15 @@ public class AddPageExpendFragment extends BaseFragment
         TimeChoiceDialogFragment.OnTimeSelectedListener,
         MemberChoiceDialogFragment.OnMemberSelectedListener,
         CategoryChoiceDialogFragment.OnCategorySelectedListener,
-        CalculatorUtil.CalculatorUtilListener {
+        CalculatorUtil.CalculatorUtilListener,
+        AccountChoiceDialogFragment.OnAccountSelectedListener {
     public int[] time = new int[5];
     boolean hasPause = false;
     String dateStr = TimeUtils.getTime(TimeUtils.getCurrentTimeInLong());
     String remarks = null;
-    private TextView mMoneyTV, mSelectTimeTV, mSelectMemberTV, mSelectCategoryTV;
+    private TextView mMoneyTV, mSelectTimeTV, mSelectMemberTV, mSelectCategoryTV, mSelectAccountTV;
     private CalculatorPopupWindow mCalculatorPopupWindow;
-    private String textMember = "自己", textCategory = "早餐", textMoney = "0.0";
+    private String textMember = "自己", textCategory = "早餐", textMoney = "0.0", textAccount = "现金";
     private int popHeight;
 
     @Override
@@ -53,11 +54,13 @@ public class AddPageExpendFragment extends BaseFragment
         mSelectTimeTV.setText(dateStr);
         mSelectMemberTV = (TextView) view.findViewById(R.id.tv_add_fragment_member);
         mSelectCategoryTV = (TextView) view.findViewById(R.id.expend_tv_spending_category);
+        mSelectAccountTV = (TextView) view.findViewById(R.id.expend_tv_spending_coin_category);
 
         mMoneyTV.setOnClickListener(this);
         view.findViewById(R.id.ll_add_fragment_time).setOnClickListener(this);
         view.findViewById(R.id.ll_add_fragment_member).setOnClickListener(this);
         view.findViewById(R.id.expend_rl_spending_category).setOnClickListener(this);
+        view.findViewById(R.id.expend_rl_spending_account_category).setOnClickListener(this);
 
 
         view.findViewById(R.id.submit).setOnClickListener(this);
@@ -127,8 +130,17 @@ public class AddPageExpendFragment extends BaseFragment
                     mCalculatorPopupWindow.setHeight(popHeight);
                 }
                 CalculatorUtil.setCalculatorUtilListener(this);
-//                mCalculatorPopupWindow.setOnCalculatorListener(this);
                 mCalculatorPopupWindow.showAtLocation(getView(), Gravity.CENTER, 0, popHeight / 2);
+                break;
+            case R.id.expend_rl_spending_category:
+                CategoryChoiceDialogFragment categoryChoiceDialogFragment = new CategoryChoiceDialogFragment();
+                categoryChoiceDialogFragment.setOnCategorySelectedListener(this);
+                categoryChoiceDialogFragment.show(getActivity().getFragmentManager(), "category");
+                break;
+            case R.id.expend_rl_spending_account_category:
+                AccountChoiceDialogFragment acountChoiceDialogFragment = new AccountChoiceDialogFragment();
+                acountChoiceDialogFragment.setOnAccountSelectedListener(this);
+                acountChoiceDialogFragment.show(getActivity().getFragmentManager(), "account");
                 break;
             case R.id.ll_add_fragment_time:
                 TimeChoiceDialogFragment timeChoiceDialogFragment = TimeChoiceDialogFragment.newInstance(time);
@@ -140,11 +152,6 @@ public class AddPageExpendFragment extends BaseFragment
                 memberChoiceDialogFragment.setOnMemberSelectedListener(this);
                 memberChoiceDialogFragment.show(getActivity().getFragmentManager(), "member");
                 break;
-            case R.id.expend_rl_spending_category:
-                CategoryChoiceDialogFragment categoryChoiceDialogFragment = new CategoryChoiceDialogFragment();
-                categoryChoiceDialogFragment.setOnCategorySelectedListener(this);
-                categoryChoiceDialogFragment.show(getActivity().getFragmentManager(), "category");
-                break;
             case R.id.submit:
                 if (textMoney.equals("0.0")) {
                     Toast.makeText(getContext(), "输入不能为空", Toast.LENGTH_SHORT).show();    //弹出一个自动消失的提示框
@@ -154,7 +161,7 @@ public class AddPageExpendFragment extends BaseFragment
                 Spending expend = new Spending();
                 expend.setMoney(textMoney);
                 expend.setSpendingCategory(textCategory);
-                expend.setAccount("现金");
+                expend.setAccount(textAccount);
                 expend.setSpendingRemark(null);
                 expend.setRecorderTime(dateStr);
                 expend.setRecorderYearMonth(dateStr.substring(0, 7));
@@ -214,6 +221,11 @@ public class AddPageExpendFragment extends BaseFragment
         Log.e("yh", "mMoneyTV" + result);
     }
 
+    @Override
+    public void onAccountSelect(String s) {
+        mSelectAccountTV.setText(s);
+        textAccount = s;
+    }
 }
 
 

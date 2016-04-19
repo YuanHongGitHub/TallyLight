@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/account_img"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/account_name"
+        android:layout_centerVertical="true"
+        android:src="@drawable/fenxiang"/>
+
+    <TextView
+        android:id="@+id/account_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/account_img"
+        android:layout_toRightOf="@+id/account_img"
+        android:text="现金"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/account_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="0.00"
+        android:textSize="18sp"/>
+</RelativeLayout>
