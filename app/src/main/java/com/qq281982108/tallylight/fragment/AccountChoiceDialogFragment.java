@@ -5,23 +5,20 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.qq281982108.tallylight.CategoryAdapter;
 import com.qq281982108.tallylight.R;
-import com.qq281982108.tallylight.adapter.CommonAdapter;
+import com.qq281982108.tallylight.adapter.AccountListViewAdapter;
+import com.qq281982108.tallylight.adapter.CategoryAdapter;
 import com.qq281982108.tallylight.db.DbOperations;
 import com.qq281982108.tallylight.model.Account;
-import com.qq281982108.tallylight.util.ViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,22 +30,10 @@ import java.util.List;
  */
 public class AccountChoiceDialogFragment extends DialogFragment {
 
-    private static final String[] ACCOUNT_CATEGORY = {"现金", "信用卡", "储蓄卡", "投资账户", "储值卡", "网络账户", "虚拟账户", "债权/债务人"};
-    private TextView myself, spouse, children, parents, friends, family;
-    private EditText et_other;
-    private Button btn_other;
+    public static final String[] ACCOUNT_CATEGORY = {"现金", "信用卡", "储蓄卡", "投资账户", "储值卡", "网络账户", "虚拟账户", "债权/债务人"};
     private OnAccountSelectedListener mListener;
     private ListView mListView;
-    private List<Account> crashAccountList = new ArrayList<>();
-    private List<Account> creditCardAccountList = new ArrayList<>();
-    private List<Account> depositCardAccountList = new ArrayList<>();
-    private List<Account> investmentAccountList = new ArrayList<>();
-    private List<Account> valueCardAccountList = new ArrayList<>();
-    private List<Account> onlineAccountList = new ArrayList<>();
-    private List<Account> virtualAccountList = new ArrayList<>();
-    private List<Account> rightsOrDebtorAccountList = new ArrayList<>();
-    private List[] accountList = {crashAccountList, creditCardAccountList, depositCardAccountList, investmentAccountList,
-            valueCardAccountList, onlineAccountList, virtualAccountList, rightsOrDebtorAccountList};
+    private List[] accountList = new List[8];
     private DbOperations mDbOperations = new DbOperations();
     private LayoutInflater mInflater;
     private CategoryAdapter mCategoryAdapter = new CategoryAdapter() {
@@ -61,12 +46,11 @@ public class AccountChoiceDialogFragment extends DialogFragment {
             } else {
                 titleView = (TextView) convertView;
             }
-
             titleView.setText(title);
-
             return titleView;
         }
     };
+    private int[] accountISize = new int[8];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,31 +86,68 @@ public class AccountChoiceDialogFragment extends DialogFragment {
 
         for (int i = 0; i < ACCOUNT_CATEGORY.length; i++) {
             accountList[i] = mDbOperations.initAccountList(ACCOUNT_CATEGORY[i]);
-
             if (accountList[i].size() != 0) {
-                mCategoryAdapter.addCategory(ACCOUNT_CATEGORY[i], new CommonAdapter(getActivity(), crashAccountList, R.layout.account_item) {
-                    @Override
-                    public void convert(ViewHolder helper, Object item) {
-                        for (int j = 0; j < crashAccountList.size(); j++) {
-                            helper.setText(R.id.account_name, "haha" + j);
-                        }
-                    }
-                });
+                mCategoryAdapter.addCategory(ACCOUNT_CATEGORY[i],
+                        new AccountListViewAdapter(getActivity(), accountList[i]));
+                accountISize[i] = accountList[i].size() + 1;
+                Log.e("yy", "accountISize" + accountISize[i] + "i" + i);
             }
         }
-
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mListView.setSelection(position);
-                send(crashAccountList.get(0).getAccountName());
+                //FIXME 暂时先这么处理
+                int size0 = accountISize[0];
+                int size1 = accountISize[0] + accountISize[1];
+                int size2 = accountISize[0] + accountISize[1] + accountISize[2];
+                int size3 = accountISize[0] + accountISize[1] + accountISize[2] + accountISize[3];
+                int size4 = accountISize[0] + accountISize[1] + accountISize[2] + accountISize[3] + accountISize[4];
+                int size5 = accountISize[0] + accountISize[1] + accountISize[2] + accountISize[3] + accountISize[4] + accountISize[5];
+                int size6 = accountISize[0] + accountISize[1] + accountISize[2] + accountISize[3] + accountISize[4] + accountISize[5] + accountISize[6];
+                int size7 = accountISize[0] + accountISize[1] + accountISize[2] + accountISize[3] + accountISize[4] + accountISize[5] + accountISize[6] + accountISize[7];
+                Log.e("yy", "position" + position);
+                Log.e("yy", "accountISize[0]" + accountISize[0]);
+                Log.e("yy", "accountISize[0+1]" + (accountISize[0] + accountISize[1]));
+                if (position > 0 && position < size0) {//现金
+                    Account account =
+                            (Account) accountList[0].get(position - 1);
+                    send(account.getAccountName());
+                } else if (position > size0 && position < size1) {//信用卡
+                    Account account =
+                            (Account) accountList[1].get(position - size0 - 1);
+                    send(account.getAccountName());
+                } else if (position > size1 && position < size2) {//储蓄卡
+                    Account account =
+                            (Account) accountList[2].get(position - size1 - 1);
+                    send(account.getAccountName());
+                } else if (position > size2 && position < size3) {//投资账户
+                    Account account =
+                            (Account) accountList[3].get(position - size2 - 1);
+                    send(account.getAccountName());
+                } else if (position > size3 && position < size4) {//储值卡
+                    Account account =
+                            (Account) accountList[4].get(position - size3 - 1);
+                    send(account.getAccountName());
+                } else if (position > size4 && position < size5) {//网络账户
+                    Account account =
+                            (Account) accountList[5].get(position - size4 - 1);
+                    send(account.getAccountName());
+                } else if (position > size5 && position < size6) {//虚拟账户
+                    Account account =
+                            (Account) accountList[6].get(position - size5 - 1);
+                    send(account.getAccountName());
+                } else if (position > size6 && position < size7) {//债权/债务人
+                    Account account =
+                            (Account) accountList[7].get(position - size6 - 1);
+                    send(account.getAccountName());
+                }
             }
         });
         mListView.setAdapter(mCategoryAdapter);
 
         return rootView;
     }
-
     private void send(String s) {
         if (s == null) return;
         mListener.onAccountSelect(s);
@@ -136,7 +157,6 @@ public class AccountChoiceDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return super.onCreateDialog(savedInstanceState);
-
     }
 
     @Override

@@ -3,14 +3,13 @@ package com.qq281982108.tallylight.fragment;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.qq281982108.tallylight.R;
-import com.qq281982108.tallylight.adapter.ClassifyMainAdapter;
-import com.qq281982108.tallylight.adapter.ClassifyMoreAdapter;
+import com.qq281982108.tallylight.model.Account;
 
 /**
  * 项目名称：TallyLight
@@ -20,16 +19,8 @@ import com.qq281982108.tallylight.adapter.ClassifyMoreAdapter;
  * 修改备注：
  */
 public class AddAccountDialogFragment extends DialogFragment implements View.OnClickListener {
-    ClassifyMainAdapter mainAdapter;
-    ClassifyMoreAdapter moreAdapter;
-    private ListView mainlist;
-    private ListView morelist;
-    private String[] ClassifyMain;
-    private String[][] ClassifyMore;
-    private int get_id;
-    private int a = -1;
-    private int main_postion = -1;
-    private int list_id;
+
+    AddCrashAccountDialogFragment addCrashAccountDialogFragment;
     private OnAccountAddedListener mListener;
 
     @Override
@@ -46,6 +37,15 @@ public class AddAccountDialogFragment extends DialogFragment implements View.OnC
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.choice_add_account, null);
+
+        rootView.findViewById(R.id.add_crash_account).setOnClickListener(this);
+        rootView.findViewById(R.id.add_credit_card_account).setOnClickListener(this);
+        rootView.findViewById(R.id.add_deposit_card_account).setOnClickListener(this);
+        rootView.findViewById(R.id.add_investment_account).setOnClickListener(this);
+        rootView.findViewById(R.id.add_value_card_account).setOnClickListener(this);
+        rootView.findViewById(R.id.add_online_account).setOnClickListener(this);
+        rootView.findViewById(R.id.add_virtual_account).setOnClickListener(this);
+        rootView.findViewById(R.id.add_rights_or_debtor_account).setOnClickListener(this);
 
         return rootView;
     }
@@ -65,9 +65,64 @@ public class AddAccountDialogFragment extends DialogFragment implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.add_crash_account:
+                //  TODO
+                initDialog(AccountChoiceDialogFragment.ACCOUNT_CATEGORY[0]);
+                break;
+            case R.id.add_credit_card_account:
+                //  TODO
+                initDialog(AccountChoiceDialogFragment.ACCOUNT_CATEGORY[1]);
+                break;
+            case R.id.add_deposit_card_account:
+                //  TODO
+                initDialog(AccountChoiceDialogFragment.ACCOUNT_CATEGORY[2]);
+                break;
+            case R.id.add_investment_account:
+                //  TODO
+                initDialog(AccountChoiceDialogFragment.ACCOUNT_CATEGORY[3]);
+                break;
+            case R.id.add_value_card_account:
+                //  TODO
+                initDialog(AccountChoiceDialogFragment.ACCOUNT_CATEGORY[4]);
+                break;
+            case R.id.add_online_account:
+                //  TODO
+                initDialog(AccountChoiceDialogFragment.ACCOUNT_CATEGORY[5]);
+                break;
+            case R.id.add_virtual_account:
+                //  TODO
+                initDialog(AccountChoiceDialogFragment.ACCOUNT_CATEGORY[6]);
+                break;
+            case R.id.add_rights_or_debtor_account:
+                //  TODO
+                initDialog(AccountChoiceDialogFragment.ACCOUNT_CATEGORY[7]);
+                break;
             default:
                 break;
         }
+    }
+
+    public void initDialog(final String s) {
+        addCrashAccountDialogFragment = AddCrashAccountDialogFragment.newInstance(s);
+        addCrashAccountDialogFragment.setOnAccountAddFinishedListener(new AddCrashAccountDialogFragment.OnAccountAddFinishedListener() {
+            @Override
+            public void onAddFinished(String accountName, String accountMoney, String accountRemarks) {
+                saveAndSend(s, accountName, accountMoney, accountRemarks);
+            }
+        });
+        addCrashAccountDialogFragment.show(getActivity().getFragmentManager(), "addAccountDetail");
+    }
+
+    public void saveAndSend(String accountCategory, String accountName, String accountMoney, String accountRemarks) {
+        Account account = new Account();
+        account.setAccountCategory(accountCategory);
+        account.setAccountName(accountName);
+        account.setMoney(accountMoney);
+        account.setRemarks(accountRemarks);
+        Log.e("yh", "accountName:" + accountName + "--accountMoney:" + accountMoney + "--accountRemarks:" + accountRemarks);
+        account.save();
+        mListener.onAdded(accountName);
+        dismiss();
     }
 
     public interface OnAccountAddedListener {

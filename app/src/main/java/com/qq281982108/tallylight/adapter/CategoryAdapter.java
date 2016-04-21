@@ -1,9 +1,11 @@
-package com.qq281982108.tallylight;
+package com.qq281982108.tallylight.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
+
+import com.qq281982108.tallylight.Category;
 
 import java.util.ArrayList;
 import java.util.List;

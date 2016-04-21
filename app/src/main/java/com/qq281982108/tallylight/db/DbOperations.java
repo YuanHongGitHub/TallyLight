@@ -24,6 +24,7 @@ public class DbOperations {
     private List<String> groupList;
     private List<List<Spending>> childList;
     private List<Account> mAccountList;
+    private List<String> mAccountNameList;
     private List<String> categoryList;
 
     public List<String> initGroupList() {
@@ -86,17 +87,22 @@ public class DbOperations {
     public List<Account> initAccountList(String accountCategory) {
         mAccountList = new ArrayList<Account>();
         List<Account> accounts = DataSupport.where("accountCategory = ?", accountCategory).find(Account.class);
-        if (accounts.size() == 0) {
-            Account account = new Account();
-            account.setAccountCategory("现金");
-            account.setAccountName("现金");
-            account.setMoney("0.00");
-            account.save();
-        }
+        Log.e("yh", "accounts.size():" + accounts.size());
         for (int i = 0; i < accounts.size(); i++) {
             mAccountList.add(accounts.get(i));
         }
 
         return mAccountList;
+    }
+
+    public List<String> loadAllAccountList() {
+        mAccountNameList = new ArrayList<String>();
+        List<Account> accounts = DataSupport.findAll(Account.class);
+        Log.e("yh", "accounts.size():" + accounts.size());
+        for (int i = 0; i < accounts.size(); i++) {
+            mAccountNameList.add(accounts.get(i).getAccountName());
+        }
+
+        return mAccountNameList;
     }
 }

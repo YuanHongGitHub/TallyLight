@@ -14,6 +14,7 @@ public class Account extends DataSupport {
     private String accountCategory;
     private String accountName;
     private String money;
+    private String remarks;
 
     public int getId() {
         return id;
@@ -45,5 +46,13 @@ public class Account extends DataSupport {
 
     public void setMoney(String money) {
         this.money = money;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }
